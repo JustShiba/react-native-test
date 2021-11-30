@@ -3,7 +3,7 @@ import { Image, StyleSheet, Text, TextInput, View, TouchableOpacity } from 'reac
 import { StatusBar } from 'expo-status-bar';
 import { LinearGradient } from 'expo-linear-gradient';
 
-export const LoginPage = () => {
+export const SignupPage = () => {
     const [userEmail, setuserEmail] = useState('');
     const [userPassword, setuserPassword] = useState('');
     return (
@@ -14,7 +14,7 @@ export const LoginPage = () => {
                 source={require('../assets/images/orange-line.png')}
                 resizeMethod="auto"
             />
-            <Text style={styles.title}>Alredy singed up?</Text>
+            <Text style={styles.title}>First time? </Text>
             <View style={styles.inputsBox}>
                 <View>
                     <TextInput
@@ -56,14 +56,8 @@ export const LoginPage = () => {
                     </LinearGradient>
                 </TouchableOpacity>
             </View>
-            <TouchableOpacity
-                style={styles.buttonToSignup}
-                onPress={() => console.log('Go to sign up')}
-            >
-                <Text style={styles.linkToSignup}>Sign Up</Text>
-            </TouchableOpacity>
             <View style={styles.boxTitleAuthorization}>
-                <Text style={styles.titleAuthorization}>Log in</Text>
+                <Text style={styles.titleAuthorization}>sing up</Text>
             </View>
         </View>
     );
@@ -127,7 +121,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         maxWidth: 160,
         position: 'absolute',
-        bottom: '-30%',
+        bottom: '-50%',
         paddingLeft: 39,
         paddingRight: 39,
         paddingTop: 15,
