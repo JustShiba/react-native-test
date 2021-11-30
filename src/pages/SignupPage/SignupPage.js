@@ -8,10 +8,9 @@ export const SignupPage = () => {
     const [userPassword, setuserPassword] = useState('');
     return (
         <View>
-            <StatusBar backgroundColor="transparent" />
             <Image
                 style={styles.orangeLine}
-                source={require('../assets/images/orange-line.png')}
+                source={require('../../assets/images/orange-line.png')}
                 resizeMethod="auto"
             />
             <Text style={styles.title}>First time? </Text>
@@ -52,7 +51,7 @@ export const SignupPage = () => {
                         start={{ x: 0.1, y: 0.2 }}
                         locations={[0.1, 0.8]}
                     >
-                        <Image source={require('../assets/images/Arrow.png')} />
+                        <Image source={require('../../assets/images/Arrow.png')} />
                     </LinearGradient>
                 </TouchableOpacity>
             </View>
@@ -75,8 +74,8 @@ const styles = StyleSheet.create({
         marginTop: -30,
         textTransform: 'uppercase',
         fontSize: 22,
-        // fontFamily: 'RobotoSlab-Medium',
-        fontWeight: '700',
+        fontFamily: 'RobotoSlab_Bold',
+        fontWeight: '800',
         color: '#2A4D60',
     },
     inputsBox: {
@@ -133,7 +132,8 @@ const styles = StyleSheet.create({
     titleAuthorization: {
         textTransform: 'uppercase',
         fontSize: 20,
-        fontWeight: '700',
+        fontFamily: 'RobotoSlab_Bold',
+        fontWeight: '800',
         color: '#2A4D60',
     },
 });
