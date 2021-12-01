@@ -8,4 +8,6 @@ export const useFonts = async () =>
         RobotoSlab_SemiBold: require('../../assets/fonts/RobotoSlab/RobotoSlab-SemiBold.ttf'),
         RobotoSlab_Bold: require('../../assets/fonts/RobotoSlab/RobotoSlab-Bold.ttf'),
         Pattaya: require('../../assets/fonts/Pattaya/Pattaya-Regular.ttf'),
+        Overlock_Regular: require('../../assets/fonts/Overlock/Overlock-Regular.ttf'),
+        Overlock_Bold: require('../../assets/fonts/Overlock/Overlock-Bold.ttf'),
     });
