@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Image, StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
+import { Image, Text, TextInput, View, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+
+import { styles } from '../LoginPage/style';
 
 export const SignupPage = () => {
     const [userEmail, setuserEmail] = useState('');
@@ -10,7 +11,7 @@ export const SignupPage = () => {
         <View>
             <Image
                 style={styles.orangeLine}
-                source={require('../../assets/images/orange-line.png')}
+                source={require('../../../assets/images/OrangeLine.png')}
                 resizeMethod="auto"
             />
             <Text style={styles.title}>First time? </Text>
@@ -51,7 +52,7 @@ export const SignupPage = () => {
                         start={{ x: 0.1, y: 0.2 }}
                         locations={[0.1, 0.8]}
                     >
-                        <Image source={require('../../assets/images/Arrow.png')} />
+                        <Image source={require('../../../assets/images/Arrow.png')} />
                     </LinearGradient>
                 </TouchableOpacity>
             </View>
@@ -61,79 +62,3 @@ export const SignupPage = () => {
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    orangeLine: {
-        width: '100%',
-        height: 250,
-    },
-    title: {
-        backgroundColor: 'rgba(255, 255, 255, 0)',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        marginTop: -30,
-        textTransform: 'uppercase',
-        fontSize: 22,
-        fontFamily: 'RobotoSlab_Bold',
-        fontWeight: '800',
-        color: '#2A4D60',
-    },
-    inputsBox: {
-        marginTop: 40,
-        height: 120,
-        width: '75%',
-        backgroundColor: '#FFFFFF',
-        borderTopRightRadius: 100,
-        borderBottomRightRadius: 100,
-        position: 'relative',
-    },
-    inputs: {
-        height: 60,
-        width: '100%',
-        margin: 0,
-        fontSize: 18,
-        paddingHorizontal: 15,
-        color: '#00000080',
-    },
-    emailInput: {
-        borderBottomColor: '#ECECEC',
-        borderBottomWidth: 2,
-    },
-    submitButtonGradient: {
-        width: 50,
-        height: 50,
-        borderRadius: 25,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    linkToSignup: {
-        fontSize: 16,
-        textTransform: 'uppercase',
-        color: '#A0A0A0',
-        textDecorationLine: 'underline',
-    },
-    buttonToSignup: {
-        marginTop: '10%',
-        marginLeft: '60%',
-    },
-    boxTitleAuthorization: {
-        fontSize: 20,
-        maxWidth: 160,
-        position: 'absolute',
-        bottom: '-50%',
-        paddingLeft: 39,
-        paddingRight: 39,
-        paddingTop: 15,
-        paddingBottom: 15,
-        backgroundColor: 'white',
-        borderBottomRightRadius: 50,
-        borderTopRightRadius: 50,
-    },
-    titleAuthorization: {
-        textTransform: 'uppercase',
-        fontSize: 20,
-        fontFamily: 'RobotoSlab_Bold',
-        fontWeight: '800',
-        color: '#2A4D60',
-    },
-});

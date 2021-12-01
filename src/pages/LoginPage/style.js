@@ -1,0 +1,77 @@
+import { StyleSheet } from 'react-native';
+
+export const styles = StyleSheet.create({
+    orangeLine: {
+        width: '100%',
+        height: 250,
+    },
+    title: {
+        backgroundColor: 'rgba(255, 255, 255, 0)',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        marginTop: -30,
+        textTransform: 'uppercase',
+        fontSize: 22,
+        fontFamily: 'RobotoSlab_Bold',
+        fontWeight: '800',
+        color: '#2A4D60',
+    },
+    inputsBox: {
+        marginTop: 40,
+        height: 120,
+        width: '75%',
+        backgroundColor: '#FFFFFF',
+        borderTopRightRadius: 100,
+        borderBottomRightRadius: 100,
+        position: 'relative',
+    },
+    inputs: {
+        height: 60,
+        width: '100%',
+        margin: 0,
+        fontSize: 18,
+        paddingHorizontal: 15,
+        color: '#00000080',
+    },
+    emailInput: {
+        borderBottomColor: '#ECECEC',
+        borderBottomWidth: 2,
+    },
+    submitButtonGradient: {
+        width: 50,
+        height: 50,
+        borderRadius: 25,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    linkToSignup: {
+        fontSize: 16,
+        textTransform: 'uppercase',
+        color: '#A0A0A0',
+        textDecorationLine: 'underline',
+    },
+    buttonToSignup: {
+        marginTop: '10%',
+        marginLeft: '60%',
+    },
+    boxTitleAuthorization: {
+        fontSize: 20,
+        maxWidth: 160,
+        position: 'absolute',
+        bottom: '-30%',
+        paddingLeft: 39,
+        paddingRight: 39,
+        paddingTop: 15,
+        paddingBottom: 15,
+        backgroundColor: 'white',
+        borderBottomRightRadius: 50,
+        borderTopRightRadius: 50,
+    },
+    titleAuthorization: {
+        textTransform: 'uppercase',
+        fontSize: 20,
+        fontFamily: 'RobotoSlab_Bold',
+        fontWeight: '800',
+        color: '#2A4D60',
+    },
+});
