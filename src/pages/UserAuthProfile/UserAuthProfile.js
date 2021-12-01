@@ -33,6 +33,14 @@ const styles = StyleSheet.create({
         marginTop: 15,
         borderRadius: 25,
         backgroundColor: '#FFFFFF',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 0,
+        },
+        shadowOpacity: 0.2,
+        shadowRadius: 10,
+        elevation: 10,
     },
     backgroundUser: {
         position: 'absolute',

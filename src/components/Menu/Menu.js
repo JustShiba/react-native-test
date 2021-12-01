@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, SafeAreaView, Platform } from 'react-native';
+import { View, StyleSheet, SafeAreaView } from 'react-native';
 import { PostsIconNotActive } from '../../../assets/componentIcons/posts/PostsIconNotActive';
 import { UsersIconNotActive } from '../../../assets/componentIcons/users/UsersIconNotActive';
 import { AddPostIconNotActive } from '../../../assets/componentIcons/addPost/AddPostIconNotActive';
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.05,
         shadowRadius: 10,
-        elevation: Platform.OS === 'ios' ? 15 : 25,
+        elevation: 25,
     },
     wrapper: {
         paddingTop: 10,

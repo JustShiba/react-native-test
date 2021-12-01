@@ -24,6 +24,14 @@ export const styles = StyleSheet.create({
         borderTopRightRadius: 100,
         borderBottomRightRadius: 100,
         position: 'relative',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 2,
+            height: 7,
+        },
+        shadowOpacity: 0.09,
+        shadowRadius: 7,
+        elevation: 8,
     },
     inputs: {
         height: 60,
@@ -66,6 +74,14 @@ export const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderBottomRightRadius: 50,
         borderTopRightRadius: 50,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 2,
+            height: 7,
+        },
+        shadowOpacity: 0.09,
+        shadowRadius: 5,
+        elevation: 7,
     },
     titleAuthorization: {
         textTransform: 'uppercase',
