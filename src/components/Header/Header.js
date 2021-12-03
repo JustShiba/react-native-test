@@ -17,6 +17,7 @@ export const Header = () => {
 
 const styles = StyleSheet.create({
     container: {
+        marginTop: 15,
         alignItems: 'center',
         width: '100%',
     },
