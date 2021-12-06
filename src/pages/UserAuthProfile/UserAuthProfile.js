@@ -1,10 +1,11 @@
 import React from 'react';
-import { Text, View, StyleSheet, Image } from 'react-native';
+import { Text, View, StyleSheet, Image, ScrollView } from 'react-native';
+
 import { Post } from '../../components/Post/Post';
 
 export const UserAuthProfile = () => {
     return (
-        <View>
+        <View style={styles.box}>
             <View style={styles.userInformationBox}>
                 <Image
                     style={styles.backgroundUser}
@@ -20,27 +21,35 @@ export const UserAuthProfile = () => {
                     </View>
                 </View>
             </View>
-            <Post />
+            <ScrollView style={styles.list}>
+                <Post />
+                <Post />
+                <Post />
+            </ScrollView>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
+    box: {
+        backgroundColor: 'transparent',
+    },
     userInformationBox: {
         width: '100%',
         height: 114,
         padding: 26,
         marginTop: 15,
+        marginBottom: 10,
         borderRadius: 25,
         backgroundColor: '#FFFFFF',
         shadowColor: '#000',
         shadowOffset: {
             width: 0,
-            height: 0,
+            height: 5,
         },
-        shadowOpacity: 0.2,
-        shadowRadius: 10,
-        elevation: 10,
+        shadowOpacity: 0.1,
+        shadowRadius: 5,
+        elevation: 8,
     },
     backgroundUser: {
         position: 'absolute',
@@ -57,6 +66,14 @@ const styles = StyleSheet.create({
         padding: 8,
         borderRadius: 100,
         marginRight: 25,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 0,
+        },
+        shadowOpacity: 0.2,
+        shadowRadius: 10,
+        elevation: 15,
     },
     userIconText: {
         fontFamily: 'Pattaya',
@@ -65,5 +82,8 @@ const styles = StyleSheet.create({
     userInformation: {
         fontFamily: 'Overlock_Bold',
         fontSize: 18,
+    },
+    list: {
+        paddingTop: 5,
     },
 });
