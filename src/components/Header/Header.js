@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView, Platform, TouchableOpacity } from 'react-native';
+
 import { SettingsIconNotActive } from '../../../assets/componentIcons/settings/SettingsIconNotActive';
 
 export const Header = () => {
@@ -17,7 +18,6 @@ export const Header = () => {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 15,
         alignItems: 'center',
         width: '100%',
     },
