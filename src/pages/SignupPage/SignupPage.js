@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Image, Text, TextInput, View, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-import { styles } from '../LoginPage/style';
+import { styles } from '../LoginPage/loginStyles';
 
 export const SignupPage = () => {
     const [userEmail, setuserEmail] = useState('');
