@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Svg, { Path, Defs, Pattern, Use, Image } from 'react-native-svg';
+import Svg, { Mask, Path, G, Defs, Pattern, Use, Image } from 'react-native-svg';
 
 export const AddPostIconActive = (props) => (
     <Svg
@@ -11,7 +11,6 @@ export const AddPostIconActive = (props) => (
         {...props}
     >
         <Path fill="url(#a)" d="M0 0h33v33H0z" />
-        <Path fill="#000" fillOpacity={0.2} d="M0 0h33v33H0z" />
         <Defs>
             <Pattern id="a" patternContentUnits="objectBoundingBox" width={1} height={1}>
                 <Use xlinkHref="#b" transform="scale(.002)" />
