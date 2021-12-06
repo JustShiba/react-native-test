@@ -3,12 +3,10 @@ import { StyleSheet, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import AppLoading from 'expo-app-loading';
 
-import { Header } from './src/components/Header/Header';
-import { Menu } from './src/components/Menu/Menu';
 import { LoginPage } from './src/pages/LoginPage/LoginPage';
 import { SignupPage } from './src/pages/SignupPage/SignupPage';
 import { useFonts } from './src/hooks/useFonts';
-import { UserAuthProfile } from './src/pages/UserAuthProfile/UserAuthProfile';
+import { Navigation } from './src/Navigation/Navigation';
 
 export default function App() {
     const [IsReadyFonts, SetIsReadyFonts] = useState(false);
@@ -40,16 +38,14 @@ export default function App() {
     return (
         <View style={styles.container}>
             <StatusBar backgroundColor="transparent" />
-            <Header />
-            <UserAuthProfile />
-            <Menu />
+            <Navigation />
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#E5E5E5',
+        backgroundColor: '#F5F6F8',
         height: '100%',
     },
 });
