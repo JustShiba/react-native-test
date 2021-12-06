@@ -1,18 +1,59 @@
-import React from 'react';
-import { View, StyleSheet, SafeAreaView } from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
+import { PostsIconActive } from '../../../assets/componentIcons/posts/PostsIconActive';
 import { PostsIconNotActive } from '../../../assets/componentIcons/posts/PostsIconNotActive';
+import { UsersIconActive } from '../../../assets/componentIcons/users/UsersIconActive';
 import { UsersIconNotActive } from '../../../assets/componentIcons/users/UsersIconNotActive';
+import { AddPostIconActive } from '../../../assets/componentIcons/addPost/AddPostIconActive';
 import { AddPostIconNotActive } from '../../../assets/componentIcons/addPost/AddPostIconNotActive';
 import { HomeIconActive } from '../../../assets/componentIcons/home/HomeIconActive';
+import { HomeIconNotActive } from '../../../assets/componentIcons/home/HomeIconNotActive';
 
 export const Menu = () => {
+    const navigation = useNavigation();
+    const [currentPosition, setCurrentPosition] = useState('Profile');
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.wrapper}>
-                <PostsIconNotActive />
-                <UsersIconNotActive />
-                <AddPostIconNotActive />
-                <HomeIconActive />
+                <TouchableOpacity
+                    onPress={() => {
+                        setCurrentPosition('Posts');
+                        navigation.navigate('Posts');
+                    }}
+                >
+                    {currentPosition === 'Posts' ? <PostsIconActive /> : <PostsIconNotActive />}
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => {
+                        setCurrentPosition('All users');
+                        navigation.navigate('All users');
+                    }}
+                >
+                    {currentPosition === 'All users' ? <UsersIconActive /> : <UsersIconNotActive />}
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => {
+                        setCurrentPosition('Add post');
+                        navigation.navigate('Add post');
+                    }}
+                >
+                    {currentPosition === 'Add post' ? (
+                        <AddPostIconActive />
+                    ) : (
+                        <AddPostIconNotActive />
+                    )}
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => {
+                        setCurrentPosition('Profile');
+                        navigation.navigate('Profile');
+                    }}
+                >
+                    {currentPosition === 'Profile' ? <HomeIconActive /> : <HomeIconNotActive />}
+                </TouchableOpacity>
             </View>
         </SafeAreaView>
     );
