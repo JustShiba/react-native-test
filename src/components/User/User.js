@@ -27,13 +27,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     userIcon: {
-        maxWidth: 33,
-        maxHeight: 35,
+        width: 35,
+        height: 35,
+        padding: 8,
+        marginRight: 15,
         backgroundColor: '#F5F6F8',
         alignItems: 'center',
-        padding: 8,
+        justifyContent: 'center',
         borderRadius: 100,
-        marginRight: 15,
         shadowColor: '#000',
         shadowOffset: {
             width: 0,
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
     },
     userIconText: {
         fontFamily: 'Pattaya',
-        fontSize: 12,
+        fontSize: 17,
     },
     userInformation: {
         fontFamily: 'Overlock_Bold',

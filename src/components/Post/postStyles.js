@@ -27,8 +27,10 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
     },
     userIcon: {
-        maxWidth: 35,
-        maxHeight: 35,
+        width: 35,
+        height: 35,
+        alignItems: 'center',
+        justifyContent: 'center',
         backgroundColor: '#F5F6F8',
         alignItems: 'center',
         padding: 8,
@@ -45,7 +47,7 @@ export const styles = StyleSheet.create({
     },
     userIconText: {
         fontFamily: 'Pattaya',
-        fontSize: 12,
+        fontSize: 17,
     },
     userInformation: {
         fontFamily: 'Overlock_Bold',

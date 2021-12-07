@@ -76,6 +76,8 @@ const styles = StyleSheet.create({
         elevation: 15,
     },
     userIconText: {
+        height: 40,
+        width: 40,
         fontFamily: 'Pattaya',
         fontSize: 35,
     },
