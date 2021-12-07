@@ -18,6 +18,7 @@ export const Header = () => {
 
 const styles = StyleSheet.create({
     container: {
+        paddingTop: 10,
         alignItems: 'center',
         width: '100%',
     },
