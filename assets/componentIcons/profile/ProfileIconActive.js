@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Svg, { Path, Defs, Pattern, Use, Image } from 'react-native-svg';
 
-export const HomeIconActive = (props) => (
+export const ProfileIconActive = (props) => (
     <Svg
         width={33}
         height={33}
