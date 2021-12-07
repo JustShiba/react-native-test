@@ -6,8 +6,8 @@ export const authorizationReducer = createSlice({
         test: '',
     },
     reducers: {
-        checkLogInStart: () => {},
+        checkLogInStart: () => { },
     },
 });
 
-export const { checkLogInStart } = authReducer.actions;
+export const { checkLogInStart } = authorizationReducer.actions;
