@@ -1,11 +1,16 @@
 import axios from 'axios';
 
-import { USER__TOKEN } from 'redux/constances/constances';
+import { USER__TOKEN } from '../redux/constances/constances';
+import { getToken } from '../secureStore/secureStore';
 
 export const apiCall = ([method, path, inf, token = false]) => {
+    // let tokenFromStorage = getToken();
+
+    // console.log(tokenFromStorage);
+
     const config = {
         headers: {
-            Authorization: `Bearer ${token ? token : localStorage.getItem(USER__TOKEN)}`,
+            Authorization: `Bearer ${token}`,
         },
     };
     if (inf) {
