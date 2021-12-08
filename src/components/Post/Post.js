@@ -3,7 +3,7 @@ import { Text, View, Image, TouchableOpacity } from 'react-native';
 
 import { CommentsIcon } from '../../../assets/componentIcons/comments/CommentsIcon';
 import { styles } from './postStyles';
-import { EditPostIcon } from '../../../assets/componentIcons/EditPost/EditPostIcon';
+import { EditPostIcon } from '../../../assets/componentIcons/editPost/EditPostIcon';
 
 export const Post = () => {
     return (
