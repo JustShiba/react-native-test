@@ -3,10 +3,14 @@ import { Image, Text, TextInput, View, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 import { styles } from './loginStyles';
+import { useDispatch } from 'react-redux';
+import { loginStart } from '../../redux/authorization/authorizationReducer';
 
-export const LoginPage = () => {
+export const LoginPage = ({ navigation }) => {
     const [userEmail, setuserEmail] = useState('');
     const [userPassword, setuserPassword] = useState('');
+    const dispatch = useDispatch();
+
     return (
         <View>
             <Image
@@ -43,7 +47,7 @@ export const LoginPage = () => {
                 </View>
                 <TouchableOpacity
                     style={{ position: 'absolute', right: -15, top: '28%' }}
-                    onPress={() => console.log({ userEmail, userPassword })}
+                    onPress={() => dispatch(loginStart({ userEmail, userPassword }))}
                     activeOpacity="0.8"
                 >
                     <LinearGradient
@@ -58,7 +62,7 @@ export const LoginPage = () => {
             </View>
             <TouchableOpacity
                 style={styles.buttonToSignup}
-                onPress={() => console.log('Go to sign up')}
+                onPress={() => navigation.navigate('Signup')}
             >
                 <Text style={styles.linkToSignup}>Sign Up</Text>
             </TouchableOpacity>
