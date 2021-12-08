@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 
 import { UserAuthProfile } from '../../pages/UserAuthProfile/UserAuthProfile';
 import { UsersPage } from '../../pages/UsersPage/UsersPage';
@@ -23,41 +23,41 @@ export const Navigation = () => {
     return (
         <NavigationContainer>
             <Header />
-            <Tab.Navigator screenOptions={({ route }) => ({
-                tabBarIcon: ({ focused }) => {
-                    let iconName;
+            <Tab.Navigator
+                screenOptions={({ route }) => ({
+                    tabBarIcon: ({ focused }) => {
+                        let iconName;
 
-                    if (route.name === 'Profile') {
-                        iconName = focused ? <ProfileIconActive /> : <ProfileIconNotActive />;
-                    } else if (route.name === 'Add post') {
-                        iconName = focused ? <AddPostIconActive /> : <AddPostIconNotActive />;
-                    } else if (route.name === 'All users') {
-                        iconName = focused ? <UsersIconActive /> : <UsersIconNotActive />;
-                    } else if (route.name === 'Posts') {
-                        iconName = focused ? <PostsIconActive /> : <PostsIconNotActive />;
-                    }
+                        if (route.name === 'Profile') {
+                            iconName = focused ? <ProfileIconActive /> : <ProfileIconNotActive />;
+                        } else if (route.name === 'Add post') {
+                            iconName = focused ? <AddPostIconActive /> : <AddPostIconNotActive />;
+                        } else if (route.name === 'All users') {
+                            iconName = focused ? <UsersIconActive /> : <UsersIconNotActive />;
+                        } else if (route.name === 'Posts') {
+                            iconName = focused ? <PostsIconActive /> : <PostsIconNotActive />;
+                        }
 
-                    return iconName;
-                },
-                tabBarShowLabel: false,
-                tabBarStyle: styles.wrapper,
-                header: () => null,
-
-            })}>
+                        return iconName;
+                    },
+                    tabBarShowLabel: false,
+                    tabBarStyle: styles.wrapper,
+                    header: () => null,
+                })}
+            >
                 <Tab.Screen name="Posts" component={PostsPage} />
                 <Tab.Screen name="All users" component={UsersPage} />
                 <Tab.Screen name="Add post" component={AddPostPage} />
                 <Tab.Screen name="Profile" component={UserAuthProfile} />
             </Tab.Navigator>
         </NavigationContainer>
-
     );
 };
 
 const styles = StyleSheet.create({
     wrapper: {
-        paddingTop: 10,
-        paddingBottom: 10,
+        paddingTop: Platform.OS === 'ios' ? 0 : 10,
+        paddingBottom: Platform.OS === 'ios' ? 20 : 10,
         paddingHorizontal: 30,
     },
 });
