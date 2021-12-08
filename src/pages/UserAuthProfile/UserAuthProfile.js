@@ -59,11 +59,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     userIcon: {
-        maxWidth: 65,
-        maxHeight: 65,
+        width: 65,
+        height: 65,
         backgroundColor: '#F5F6F8',
         alignItems: 'center',
-        padding: 8,
+        justifyContent: 'center',
         borderRadius: 100,
         marginRight: 25,
         shadowColor: '#000',
@@ -76,8 +76,6 @@ const styles = StyleSheet.create({
         elevation: 15,
     },
     userIconText: {
-        height: 40,
-        width: 40,
         fontFamily: 'Pattaya',
         fontSize: 35,
     },

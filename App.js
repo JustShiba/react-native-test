@@ -1,5 +1,4 @@
 import React from 'react';
-import { View } from 'react-native';
 import { Provider } from 'react-redux';
 
 import { Index } from './src/components/index';
@@ -12,5 +11,3 @@ export default function App() {
         </Provider>
     );
 }
-
-
