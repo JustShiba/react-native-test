@@ -90,4 +90,9 @@ export const styles = StyleSheet.create({
         fontWeight: '800',
         color: '#2A4D60',
     },
+    arrowBack: {
+        position: 'absolute',
+        top: 50,
+        left: 25,
+    },
 });
