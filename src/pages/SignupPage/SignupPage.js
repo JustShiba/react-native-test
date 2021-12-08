@@ -3,8 +3,9 @@ import { Image, Text, TextInput, View, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 import { styles } from '../LoginPage/loginStyles';
+import { ArrowBackIcon } from '../../../assets/componentIcons/arrowBack/ArrowBackIcon';
 
-export const SignupPage = () => {
+export const SignupPage = ({ navigation }) => {
     const [userEmail, setuserEmail] = useState('');
     const [userPassword, setuserPassword] = useState('');
     return (
@@ -14,6 +15,9 @@ export const SignupPage = () => {
                 source={require('../../../assets/images/OrangeLine.png')}
                 resizeMethod="auto"
             />
+            <TouchableOpacity style={styles.arrowBack} onPress={() => navigation.navigate('Login')}>
+                <ArrowBackIcon />
+            </TouchableOpacity>
             <Text style={styles.title}>First time? </Text>
             <View style={styles.inputsBox}>
                 <View>
