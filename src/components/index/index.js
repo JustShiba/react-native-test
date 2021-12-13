@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View } from 'react-native';
 import AppLoading from 'expo-app-loading';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { LoginPage } from '../../pages/LoginPage/LoginPage';
-import { SignupPage } from '../../pages/SignupPage/SignupPage';
 import { useFonts } from '../../hooks/useFonts';
 import { Navigation } from '../../components/Navigation/Navigation';
+import { checkLoginStart } from '../../redux/authorization/authorizationReducer';
 
 export const Index = () => {
     const [IsReadyFonts, SetIsReadyFonts] = useState(false);
-    const [autorized, setAuthorized] = useState(false); //'false' value is for develop
+    const dispatch = useDispatch();
+    const { isAuthorized } = useSelector(state => state.authorization);
+
+    useEffect(() => {
+        dispatch(checkLoginStart());
+    }, []);
 
     const LoadFonts = async () => {
         await useFonts();
@@ -20,14 +25,14 @@ export const Index = () => {
             <AppLoading
                 startAsync={LoadFonts}
                 onFinish={() => SetIsReadyFonts(true)}
-                onError={() => {}}
+                onError={() => { }}
             />
         );
     }
 
     return (
         <View>
-            <Navigation autorized={autorized} />
+            <Navigation autorized={isAuthorized} />
         </View>
     );
 };
