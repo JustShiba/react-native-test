@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import { Image, Text, TextInput, View, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { styles } from '../LoginPage/loginStyles';
 import { ArrowBackIcon } from '../../../assets/componentIcons/arrowBack/ArrowBackIcon';
+import { signupStart } from '../../redux/authorization/authorizationReducer';
 
 export const SignupPage = ({ navigation }) => {
-    const [userEmail, setuserEmail] = useState('');
-    const [userPassword, setuserPassword] = useState('');
+    const { userAuthorizationInformation } = useSelector(state => state.authorization.inputUserInformation)
+    const [userEmail, setuserEmail] = useState(userAuthorizationInformation.email);
+    const [userPassword, setuserPassword] = useState(userAuthorizationInformation.password);
+    const dispatch = useDispatch();
+
     return (
         <View>
             <Image
@@ -47,7 +52,7 @@ export const SignupPage = ({ navigation }) => {
                 </View>
                 <TouchableOpacity
                     style={{ position: 'absolute', right: -15, top: '28%' }}
-                    onPress={() => console.log({ userEmail, userPassword })}
+                    onPress={() => dispatch(signupStart({ userEmail, userPassword }))}
                     activeOpacity="0.8"
                 >
                     <LinearGradient

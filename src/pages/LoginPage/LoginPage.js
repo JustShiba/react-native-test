@@ -3,12 +3,13 @@ import { Image, Text, TextInput, View, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 import { styles } from './loginStyles';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginStart } from '../../redux/authorization/authorizationReducer';
 
 export const LoginPage = ({ navigation }) => {
-    const [userEmail, setuserEmail] = useState('');
-    const [userPassword, setuserPassword] = useState('');
+    const { userAuthorizationInformation } = useSelector(state => state.authorization.inputUserInformation)
+    const [userEmail, setuserEmail] = useState(userAuthorizationInformation.email);
+    const [userPassword, setUserPassword] = useState(userAuthorizationInformation.password);
     const dispatch = useDispatch();
 
     return (
@@ -42,7 +43,7 @@ export const LoginPage = ({ navigation }) => {
                         autoCapitalize="none"
                         secureTextEntry={true}
                         defaultValue={userPassword}
-                        onChangeText={(text) => setuserPassword(text)}
+                        onChangeText={(text) => setUserPassword(text)}
                     />
                 </View>
                 <TouchableOpacity
