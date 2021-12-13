@@ -1,10 +1,89 @@
-import React from 'react';
-import { Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { Image, View } from 'react-native';
+import { ArrowSend } from '../../../assets/componentIcons/arrowSend/ArrowSend'
 
 export const AddPostPage = () => {
+    const [postTitleAddPost, setPostTitleAddPost] = useState('');
+    const [postBodyAddPost, setPostBodyAddPost] = useState('');
+
     return (
         <View>
-            <Text>Hello new post</Text>
+            <Image
+                source={require('../../../assets/images/OrangeRect.png')}
+                style={styles.oranreImg}
+                resizeMode="stretch"
+            />
+            <View style={styles.addPostCard}>
+                <TextInput
+                    placeholder="Title of the post"
+                    style={styles.inputAddTitle}
+                    placeholderTextColor="rgba(0, 0, 0, 1)"
+                    autoCapitalize="none"
+                    defaultValue={postTitleAddPost}
+                    onChangeText={(text) => setPostTitleAddPost(text)}
+                />
+                <TextInput
+                    placeholder="Here you can write post's body"
+                    style={styles.inputAddBody}
+                    placeholderTextColor="rgba(0, 0, 0, 1)"
+                    autoCapitalize="none"
+                    defaultValue={postBodyAddPost}
+                    onChangeText={(text) => setPostBodyAddPost(text)}
+                    multiline={true}
+                />
+                <TouchableOpacity style={styles.arrowSendPost} onPress={() => console.log('send new post')}>
+                    <ArrowSend />
+                </TouchableOpacity>
+            </View>
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    oranreImg: {
+        width: '100%',
+        flex: 1,
+        position: 'absolute',
+    },
+    addPostCard: {
+        marginTop: 50,
+        backgroundColor: 'white',
+        paddingTop: 20,
+        paddingRight: 60,
+        paddingBottom: 20,
+        paddingLeft: 20,
+        borderBottomLeftRadius: 25,
+        borderBottomRightRadius: 25,
+        borderTopRightRadius: 25,
+        borderTopLeftRadius: 25,
+        shadowColor: '#000000',
+        shadowOffset: {
+            width: 0,
+            height: 5,
+        },
+        shadowOpacity: 0.15,
+        shadowRadius: 6,
+        elevation: 15,
+    },
+    inputAddTitle: {
+        width: '90%',
+        height: 20,
+        fontSize: 20,
+        fontFamily: 'Overlock_Bold',
+        color: '#383838',
+    },
+    inputAddBody: {
+        marginLeft: 20,
+        marginTop: 15,
+        fontSize: 20,
+        fontFamily: 'Overlock_Regular',
+        color: '#000000',
+    },
+    arrowSendPost: {
+        position: 'absolute',
+        bottom: 14,
+        right: 14
+    }
+
+});
