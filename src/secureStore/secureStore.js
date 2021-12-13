@@ -1,15 +1,12 @@
 import * as SecureStore from 'expo-secure-store';
-import { USER__TOKEN } from '../redux/constances/constances';
 
-export async function saveToken(key, value) {
-    await SecureStore.setItemAsync(USER__TOKEN, value);
-}
-
-export async function getToken() {
-    let result = await SecureStore.getItemAsync(USER__TOKEN);
-    if (result) {
-        return result;
-    } else {
-        return;
+export async function localStore(method, key, value) {
+    switch (method) {
+        case 'save':
+            return await SecureStore.setItemAsync(key, value);
+        case 'get':
+            return await SecureStore.getItemAsync(key) || null;
+        case 'remove':
+            return await SecureStore.deleteItemAsync(key);
     }
 }
