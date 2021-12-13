@@ -13,6 +13,7 @@ import { LoginPage } from '../../pages/LoginPage/LoginPage';
 import { SignupPage } from '../../pages/SignupPage/SignupPage';
 import { stackConfig, tabConfig } from './navigationConfig';
 import { styles } from './navigationStyles';
+import { CommentsPage } from '../../pages/CommentsPage/CommentsPage';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -23,18 +24,19 @@ export const Navigation = ({ autorized }) => {
             {autorized ? (
                 <View style={styles.container}>
                     <Header />
-                    <Tab.Navigator screenOptions={({ route }) => tabConfig(route)}>
+                    <Tab.Navigator screenOptions={({ route }) => tabConfig(route)} initialRouteName='Profile'>
                         <Tab.Screen name="Posts" component={PostsPage} />
                         <Tab.Screen name="All users" component={UsersPage} />
                         <Tab.Screen name="Add post" component={AddPostPage} />
                         <Tab.Screen name="Profile" component={UserAuthProfile} />
                     </Tab.Navigator>
+                    {/* <CommentsPage /> */}
                 </View>
             ) : (
                 <View style={styles.container}>
-                    <Stack.Navigator screenOptions={() => stackConfig()}>
-                        <Stack.Screen name="Signup" component={SignupPage} />
+                    <Stack.Navigator screenOptions={() => stackConfig()} initialRouteName='Login'>
                         <Stack.Screen name="Login" component={LoginPage} />
+                        <Stack.Screen name="Signup" component={SignupPage} />
                     </Stack.Navigator>
                 </View>
             )}
