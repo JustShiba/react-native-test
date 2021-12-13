@@ -1,31 +1,55 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text, View, StyleSheet, Image, ScrollView } from 'react-native';
+import { FlatList } from 'react-native-web';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Post } from '../../components/Post/Post';
+import { USER__ID } from '../../redux/constances/constances';
+import { getUserStart } from '../../redux/users/usersReducer';
+import { localStore } from '../../secureStore/secureStore';
 
-export const UserAuthProfile = () => {
+export const UserAuthProfile = ({ userIdProp }) => {
+    const { loadingUsers } = useSelector(state => state.users)
+    const dispatch = useDispatch();
+
+    useEffect(async () => {
+        const userId = userIdProp || await localStore('get', USER__ID);
+        dispatch(getUserStart(userId));
+    }, [dispatch]);
+
+    // const { email, nickname, posts } = useSelector(state => state.users.currentUserInformation);
+    // console.log(nickname);
+    // const nicknameAvatar = nickname.substring(0, 2);
     return (
-        <View style={styles.box}>
-            <View style={styles.userInformationBox}>
-                <Image
-                    style={styles.backgroundUser}
-                    source={require('../../../assets/images/ProfileLine.png')}
-                />
-                <View style={styles.userWrapper}>
-                    <View style={styles.userIcon}>
-                        <Text style={styles.userIconText}>VG</Text>
+        <View>
+            {loadingUsers ?
+                <Text>loading</Text> :
+                <View style={styles.box}>
+                    <View style={styles.userInformationBox}>
+                        <Image
+                            style={styles.backgroundUser}
+                            source={require('../../../assets/images/ProfileLine.png')}
+                        />
+                        <View style={styles.userWrapper}>
+                            <View style={styles.userIcon}>
+                                <Text style={styles.userIconText}>{'NO'}</Text>
+                            </View>
+                            <View>
+                                <Text style={styles.userInformation}>{nickname || 'No name'}</Text>
+                                <Text style={styles.userInformation}>{email || 'No email'}</Text>
+                            </View>
+                        </View>
                     </View>
-                    <View>
-                        <Text style={styles.userInformation}>Vitaliy Gan</Text>
-                        <Text style={styles.userInformation}>Vitala_gan@icloud.com</Text>
-                    </View>
+                    {/* <ScrollView style={styles.list}>
+
+                    </ScrollView> */}
+                    {/* <FlatList
+                            data={posts}
+                            renderItem={() => <Post />}
+                            keyExtractor={post => post.postId}
+                        /> */}
                 </View>
-            </View>
-            <ScrollView style={styles.list}>
-                <Post />
-                <Post />
-                <Post />
-            </ScrollView>
+            }
         </View>
     );
 };
