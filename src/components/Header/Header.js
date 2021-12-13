@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         alignItems: 'center',
         width: '100%',
+        backgroundColor: 'transparent'
     },
     headerBox: {
         flexDirection: 'row',
