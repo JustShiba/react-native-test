@@ -4,26 +4,66 @@ export const authorizationReducer = createSlice({
     name: 'authorizationReducer',
     initialState: {
         userInformation: {},
-        userAuthorizationInformation: {
-            email: '',
-            password: '',
+        inputUserInformation: {
+            userAuthorizationInformation: {
+                email: 'liyalisica9356@gmail.com',
+                password: '93567202',
+            },
         },
         isAuthorized: false,
         loadingAuthorization: false,
-        errorAuthorization: false,
+        errorAuthorization: {
+            errorAuthorizationText: '',
+            isError: false,
+        },
     },
     reducers: {
+        checkLoginStart: () => { },
+        checkLoginFinish: (state, action) => {
+            state.isAuthorized = action.payload;
+        },
         loginStart: (state, action) => {
-            state.userAuthorizationInformation.email = action.payload.userEmail;
-            state.userAuthorizationInformation.password = action.payload.userPassword;
+            const { userEmail, userPassword } = action.payload
+            state.inputUserInformation.userAuthorizationInformation.email = userEmail;
+            state.inputUserInformation.userAuthorizationInformation.password = userPassword;
         },
         loginSuccess: (state, action) => {
             state.userInformation = action.payload;
+            state.isAuthorized = true;
+            state.inputUserInformation.userAuthorizationInformation.email = '';
+            state.inputUserInformation.userAuthorizationInformation.password = '';
         },
         loginFailure: (state, action) => {
-            console.log('HEEELP');
+            state.errorAuthorization.isError = true;
+            state.errorAuthorization.errorAuthorizationText = action.payload;
+            state.inputUserInformation.userAuthorizationInformation.email = '';
+            state.inputUserInformation.userAuthorizationInformation.password = '';
+        },
+        signupStart: (state, action) => {
+            const { userEmail, userPassword } = action.payload
+            state.inputUserInformation.userAuthorizationInformation.email = userEmail;
+            state.inputUserInformation.userAuthorizationInformation.password = userPassword;
+        },
+        signupSuccess: (state) => {
+            state.inputUserInformation.userAuthorizationInformation.email = '';
+            state.inputUserInformation.userAuthorizationInformation.password = '';
+        },
+        signupFailure: (state, action) => {
+            state.errorAuthorization.isError = true;
+            state.errorAuthorization.errorAuthorizationText = action.payload;
+            state.inputUserInformation.userAuthorizationInformation.email = '';
+            state.inputUserInformation.userAuthorizationInformation.password = '';
         },
     },
 });
 
-export const { loginStart, loginSuccess, loginFailure } = authorizationReducer.actions;
+export const {
+    checkLoginStart,
+    checkLoginFinish,
+    loginStart,
+    loginSuccess,
+    loginFailure,
+    signupStart,
+    signupSuccess,
+    signupFailure,
+} = authorizationReducer.actions;

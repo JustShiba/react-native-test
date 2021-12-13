@@ -3,11 +3,13 @@ import createSagaMiddleware from 'redux-saga';
 
 import rootSaga from '../rootSaga/rootSaga';
 import { authorizationReducer } from '../authorization/authorizationReducer';
+import { usersReducer } from '../users/usersReducer';
 
 const sagaMiddleware = createSagaMiddleware();
 
 export const rootReducer = combineReducers({
     authorization: authorizationReducer.reducer,
+    users: usersReducer.reducer,
 });
 
 export const store = configureStore({
