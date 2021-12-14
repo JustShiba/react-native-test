@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { Image, View } from 'react-native';
-import { ArrowSend } from '../../../assets/componentIcons/arrowSend/ArrowSend'
+import { useDispatch } from 'react-redux';
+
+import { ArrowSend } from '../../../assets/componentIcons/arrowSend/ArrowSend';
+import { sendNewPostStart } from '../../redux/posts/postsReducer';
 
 export const AddPostPage = () => {
     const [postTitleAddPost, setPostTitleAddPost] = useState('');
     const [postBodyAddPost, setPostBodyAddPost] = useState('');
+    const dispatch = useDispatch();
 
     return (
         <View>
@@ -32,7 +36,12 @@ export const AddPostPage = () => {
                     onChangeText={(text) => setPostBodyAddPost(text)}
                     multiline={true}
                 />
-                <TouchableOpacity style={styles.arrowSendPost} onPress={() => console.log('send new post')}>
+                <TouchableOpacity
+                    style={styles.arrowSendPost}
+                    onPress={() => {
+                        dispatch(sendNewPostStart({ postTitleAddPost, postBodyAddPost }));
+                    }}
+                >
                     <ArrowSend />
                 </TouchableOpacity>
             </View>
@@ -83,7 +92,6 @@ const styles = StyleSheet.create({
     arrowSendPost: {
         position: 'absolute',
         bottom: 14,
-        right: 14
-    }
-
+        right: 14,
+    },
 });
