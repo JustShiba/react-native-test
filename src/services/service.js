@@ -3,10 +3,10 @@ import axios from 'axios';
 import { USER__TOKEN } from '../redux/constances/constances';
 import { localStore } from '../secureStore/secureStore';
 
-export const apiCall = async ([method, path, inf, token = false]) => {
+export const apiCall = async ([method, path, inf]) => {
     const config = {
         headers: {
-            Authorization: `Bearer ${token || await localStore('get', USER__TOKEN)}`,
+            Authorization: `Bearer ${await localStore('get', USER__TOKEN)}`,
         },
     };
     if (inf) {
