@@ -1,14 +1,21 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 
-export const User = () => {
+export const User = ({ userInformation }) => {
+    const { nickname, phone, userId } = userInformation.item;
+    const navigation = useNavigation();
     return (
-        <View style={styles.userBox}>
-            <View style={styles.userIcon}>
-                <Text style={styles.userIconText}>VG</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('Profile', { userIdProp: userId })}>
+            <View style={styles.userBox}>
+                <View style={styles.userIcon}>
+                    <Text style={styles.userIconText}>
+                        {nickname ? nickname.substring(0, 2).toUpperCase() : 'HI'}
+                    </Text>
+                </View>
+                <Text style={styles.userInformation}>{nickname || 'No name'}</Text>
             </View>
-            <Text style={styles.userInformation}>Vitaliy Gan</Text>
-        </View>
+        </TouchableOpacity>
     );
 };
 
