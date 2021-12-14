@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Image, Text, TextInput, View, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 import { styles } from './loginStyles';
-import { useDispatch, useSelector } from 'react-redux';
 import { loginStart } from '../../redux/authorization/authorizationReducer';
 
 export const LoginPage = ({ navigation }) => {
-    const { userAuthorizationInformation } = useSelector(state => state.authorization.inputUserInformation)
+    const { userAuthorizationInformation } = useSelector(
+        (state) => state.authorization.inputUserInformation,
+    );
     const [userEmail, setuserEmail] = useState(userAuthorizationInformation.email);
     const [userPassword, setUserPassword] = useState(userAuthorizationInformation.password);
     const dispatch = useDispatch();
