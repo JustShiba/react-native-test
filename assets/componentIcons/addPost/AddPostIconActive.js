@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Svg, { Mask, Path, G, Defs, Pattern, Use, Image } from 'react-native-svg';
+import Svg, { Path, Defs, Pattern, Use, Image } from 'react-native-svg';
 
 export const AddPostIconActive = (props) => (
     <Svg
