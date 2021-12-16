@@ -57,3 +57,8 @@ export function* signupSaga() {
         yield put(signupFailure(error.message));
     }
 }
+
+export function* logoutSaga() {
+    localStore('remove', USER__ID);
+    localStore('remove', USER__TOKEN);
+}
