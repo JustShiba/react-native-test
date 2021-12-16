@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, FlatList } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -9,9 +9,9 @@ import { getUserStart } from '../../redux/users/usersReducer';
 import { localStore } from '../../secureStore/secureStore';
 
 export const UserAuthProfile = ({ route, navigation }) => {
-    let userIdProp = route.params?.userIdProp;
+    const userIdProp = route.params?.userIdProp;
     const { loadingUsers } = useSelector((state) => state.users);
-    const { email, nickname, posts } = useSelector((state) => state.users.currentUserInformation);
+    const { email, nickname, phone, posts } = useSelector((state) => state.users.currentUserInformation);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -31,7 +31,7 @@ export const UserAuthProfile = ({ route, navigation }) => {
                 <Text>loading</Text>
             ) : (
                 <View style={styles.box}>
-                    <UserCard nickname={nickname} email={email} />
+                    <UserCard nickname={nickname} email={email} phone={phone} />
                     <FlatList
                         data={posts}
                         renderItem={(post) => <Post postInformation={post} userName={nickname} />}
