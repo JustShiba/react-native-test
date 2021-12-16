@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Image, Text } from 'react-native';
 
-export const UserCard = ({ nickname, email }) => {
+export const UserCard = ({ nickname, email, phone }) => {
     return (
         <View style={styles.userInformationBox}>
             <Image
@@ -17,6 +17,7 @@ export const UserCard = ({ nickname, email }) => {
                 <View>
                     <Text style={styles.userInformation}>{nickname || 'No name'}</Text>
                     <Text style={styles.userInformation}>{email || 'No email'}</Text>
+                    <Text style={styles.userPhone}>{phone || null}</Text>
                 </View>
             </View>
         </View>
@@ -73,4 +74,8 @@ const styles = StyleSheet.create({
         fontFamily: 'Overlock_Bold',
         fontSize: 18,
     },
+    userPhone: {
+        fontFamily: 'Overlock_Bold',
+        fontSize: 14,
+    }
 });
