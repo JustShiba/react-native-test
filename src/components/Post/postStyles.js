@@ -84,4 +84,15 @@ export const styles = StyleSheet.create({
         right: 20,
         bottom: 23,
     },
+    inputs: {
+        borderColor: '#F5F6F8',
+        borderWidth: 2,
+        height: 35,
+        borderRadius: 25,
+        paddingLeft: 10,
+        paddingRight: 10,
+    },
+    bodyInput: {
+        height: 70,
+    }
 });
