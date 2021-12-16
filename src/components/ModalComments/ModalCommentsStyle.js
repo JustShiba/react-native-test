@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
         bottom: 0,
     },
     commentsTitleBox: {
+        paddingTop: 20,
         backgroundColor: '#FFFFFF',
         borderBottomRightRadius: 25,
         borderBottomLeftRadius: 25,

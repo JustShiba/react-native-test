@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import { View, Text, Modal, TextInput, TouchableOpacity, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useDispatch } from 'react-redux';
 
 import { ArrowBackComments } from '../../../assets/componentIcons/arrowBackComments/ArrowBackComments';
 import { ArrowSend } from '../../../assets/componentIcons/arrowSend/ArrowSend';
+import { sendNewCommentStart } from '../../redux/comments/commentsReducer';
+import { UserComment } from '../UserComment/UserComment';
 import { styles } from './ModalCommentsStyle';
 
-export const ModalComments = ({ modalVisible, setModalVisible, commentsInformation }) => {
+export const ModalComments = ({ modalVisible, setModalVisible, commentsInformation, postId, userNickname }) => {
     const [addCommentText, setAddCommentText] = useState('');
-    console.log(commentsInformation);
+    const dispatch = useDispatch();
     return (
         <View>
             <Modal animationType="fade" transparent={false} visible={modalVisible}>
@@ -24,23 +27,29 @@ export const ModalComments = ({ modalVisible, setModalVisible, commentsInformati
                     </SafeAreaView>
                     <FlatList
                         data={commentsInformation}
-                        renderItem={(comment) => <Text>{comment.item.body}</Text>}
+                        renderItem={(comment) =>
+                            <UserComment
+                                textComment={comment.item.body}
+                                userComment={comment.item.userId}
+                                postId={postId}
+                                commentId={comment.item.commentId} />}
                         keyExtractor={(comment) => comment.commentId}
                     />
                     <SafeAreaView style={styles.addCommentBox}>
                         <View style={styles.userIcon}>
-                            <Text style={styles.userIconText}>VG</Text>
+                            <Text style={styles.userIconText}>{userNickname.substring(0, 2)}</Text>
                         </View>
                         <TextInput
                             style={styles.addCommentInput}
                             placeholder="Write comment..."
                             placeholderTextColor="#A7A7A7"
-                            autoCorrect={false}
+                            autoCorrect={true}
                             autoCapitalize="none"
                             defaultValue={addCommentText}
                             onChangeText={(text) => setAddCommentText(text)}
                         />
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() =>
+                            dispatch(sendNewCommentStart({ addCommentText, postId }))}>
                             <ArrowSend />
                         </TouchableOpacity>
                     </SafeAreaView>
