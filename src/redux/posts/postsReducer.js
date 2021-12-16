@@ -6,6 +6,7 @@ export const postsReducer = createSlice({
         inputPostsInformation: {
             title: '',
             body: '',
+            postId: '',
         },
         allPosts: [],
         loadingPosts: false,
@@ -24,8 +25,8 @@ export const postsReducer = createSlice({
         },
         getAllPostsFailure: (state, action) => {
             state.loadingPosts = false;
-            state.errorPosts.errorPostsText = action.payload;
             state.errorPosts.isError = true;
+            state.errorPosts.errorPostsText = action.payload;
         },
         sendNewPostStart: (state, action) => {
             state.loadingPosts = true;
@@ -38,8 +39,38 @@ export const postsReducer = createSlice({
         },
         sendNewPostFailure: (state, action) => {
             state.loadingPosts = false;
-            state.errorPosts.errorPostsText = action.payload;
             state.errorPosts.isError = true;
+            state.errorPosts.errorPostsText = action.payload;
+        },
+        changePostStart: (state, action) => {
+            state.loadingPosts = true;
+            state.inputPostsInformation.title = action.payload.newPostTitle;
+            state.inputPostsInformation.body = action.payload.newPostBody;
+            state.inputPostsInformation.postId = action.payload.postId;
+        },
+        changePostSuccess: (state) => {
+            state.loadingPosts = false;
+            state.inputPostsInformation.title = '';
+            state.inputPostsInformation.body = '';
+            state.inputPostsInformation.postId = '';
+        },
+        changePostFailure: (state, action) => {
+            state.loadingPosts = false;
+            state.errorPosts.isError = true;
+            state.errorPosts.errorPostsText = action.payload;
+        },
+        deletePostStart: (state, action) => {
+            state.loadingPosts = true;
+            state.inputPostsInformation.postId = action.payload;
+        },
+        deletePostSuccess: (state) => {
+            state.loadingPosts = false;
+            state.inputPostsInformation.postId = '';
+        },
+        deletePostFailure: (state, action) => {
+            state.loadingPosts = false;
+            state.errorPosts.isError = true;
+            state.errorPosts.errorPostsText = action.payload;
         },
     },
 });
@@ -51,4 +82,10 @@ export const {
     getAllPostsStart,
     getAllPostsSuccess,
     getAllPostsFailure,
+    changePostStart,
+    changePostSuccess,
+    changePostFailure,
+    deletePostStart,
+    deletePostSuccess,
+    deletePostFailure,
 } = postsReducer.actions;
