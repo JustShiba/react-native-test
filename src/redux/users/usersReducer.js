@@ -13,7 +13,7 @@ export const usersReducer = createSlice({
         loadingUsers: false,
         errorUsers: {
             errorUsersText: '',
-            isError: false,
+            isErrorUsers: false,
         },
     },
     reducers: {
@@ -29,7 +29,7 @@ export const usersReducer = createSlice({
         getUserFailure: (state, action) => {
             state.loadingUsers = false;
             state.selectedUserId = '';
-            state.errorUsers.esError = true;
+            state.errorUsers.isErrorUsers = true;
             state.errorUsers.errorUsersText = action.payload;
         },
         getAllUsersStart: (state) => {
@@ -41,8 +41,8 @@ export const usersReducer = createSlice({
         },
         getAllUsersFailure: (state, action) => {
             state.loadingUsers = false;
+            state.errorUsers.isErrorUsers = true;
             state.errorUsers.errorUsersText = action.payload;
-            state.errorUsers.isError = true;
         },
         deleteUserStart: (state) => {
             state.loadingUsers = true;
@@ -55,7 +55,7 @@ export const usersReducer = createSlice({
         deleteUserFailure: (state, action) => {
             state.loadingUsers = false;
             state.selectedUserId = '';
-            state.errorUsers.esError = true;
+            state.errorUsers.isErrorUsers = true;
             state.errorUsers.errorUsersText = action.payload;
         },
         changeUserDataStart: (state, action) => {
@@ -75,8 +75,12 @@ export const usersReducer = createSlice({
             state.userInputInformation.nickname = '';
             state.userInputInformation.phone = '';
             state.selectedUserId = '';
-            state.errorUsers.esError = true;
+            state.errorUsers.isErrorUsers = true;
             state.errorUsers.errorUsersText = action.payload;
+        },
+        removeError: (state) => {
+            state.errorUsers.isErrorUsers = false;
+            state.errorUsers.errorUsersText = '';
         },
     },
 });
@@ -94,4 +98,5 @@ export const {
     changeUserDataStart,
     changeUserDataSuccess,
     changeUserDataFailure,
+    removeError,
 } = usersReducer.actions;

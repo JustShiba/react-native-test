@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { FlatList, Text, View } from 'react-native';
+import { ActivityIndicator, FlatList, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { User } from '../../components/User/User';
@@ -15,15 +15,14 @@ export const UsersPage = () => {
 
     return (
         <View>
-            {loadingUsers ? (
-                <Text>loading</Text>
-            ) : (
+            {loadingUsers ?
+                <ActivityIndicator size="large" color="#FAB15F" /> :
                 <FlatList
                     data={allUsers}
                     renderItem={(user) => <User userInformation={user} />}
                     keyExtractor={(user) => user.userId}
                 />
-            )}
+            }
         </View>
     );
 };

@@ -1,4 +1,4 @@
-import { select, call, put } from 'redux-saga/effects';
+import { select, call, put, delay } from 'redux-saga/effects';
 
 import { apiCall } from '../../services/service';
 import {
@@ -10,9 +10,8 @@ import {
     deleteUserFailure,
     changeUserDataSuccess,
     changeUserDataFailure,
+    removeError,
 } from './usersReducer';
-import { localStore } from '../../secureStore/secureStore'
-import { USER__ID } from '../constances/constances';
 
 export function* getUserSaga() {
     const { selectedUserId } = yield select((state) => state.users);
@@ -24,6 +23,8 @@ export function* getUserSaga() {
         }
     } catch (error) {
         yield put(getUserFailure(error.message));
+        yield delay(3000);
+        yield put(removeError());
     }
 }
 
@@ -36,6 +37,8 @@ export function* getAllUsersSaga() {
         }
     } catch (error) {
         put(getAllUsersFailure(error.message));
+        yield delay(3000);
+        yield put(removeError());
     }
 }
 
@@ -49,6 +52,8 @@ export function* deleteUserSaga() {
         }
     } catch (error) {
         yield put(deleteUserFailure(error.message));
+        yield delay(3000);
+        yield put(removeError());
     }
 }
 
@@ -63,5 +68,7 @@ export function* changeUserDataSaga() {
         }
     } catch (error) {
         yield put(changeUserDataFailure(error.message));
+        yield delay(3000);
+        yield put(removeError());
     }
 }

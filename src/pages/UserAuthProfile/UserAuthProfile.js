@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, StyleSheet, FlatList } from 'react-native';
+import { Text, View, StyleSheet, FlatList, ActivityIndicator } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Post } from '../../components/Post/Post';
@@ -28,7 +28,7 @@ export const UserAuthProfile = ({ route, navigation }) => {
     return (
         <View>
             {loadingUsers ? (
-                <Text>loading</Text>
+                <ActivityIndicator size="large" color="#FAB15F" />
             ) : (
                 <View style={styles.box}>
                     <UserCard nickname={nickname} email={email} phone={phone} />

@@ -13,11 +13,13 @@ import { LoginPage } from '../../pages/LoginPage/LoginPage';
 import { SignupPage } from '../../pages/SignupPage/SignupPage';
 import { stackConfig, tabConfig } from './navigationConfig';
 import { styles } from './navigationStyles';
+import { ModalError } from '../ModalError/ModalError';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 export const Navigation = ({ autorized }) => {
+
     return (
         <NavigationContainer>
             {autorized ? (
@@ -41,6 +43,8 @@ export const Navigation = ({ autorized }) => {
                     </Stack.Navigator>
                 </View>
             )}
+
+            <ModalError />
         </NavigationContainer>
     );
 };

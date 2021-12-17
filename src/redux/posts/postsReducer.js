@@ -12,7 +12,7 @@ export const postsReducer = createSlice({
         loadingPosts: false,
         errorPosts: {
             errorPostsText: '',
-            isError: false,
+            isErrorPosts: false,
         },
     },
     reducers: {
@@ -25,7 +25,7 @@ export const postsReducer = createSlice({
         },
         getAllPostsFailure: (state, action) => {
             state.loadingPosts = false;
-            state.errorPosts.isError = true;
+            state.errorPosts.isErrorPosts = true;
             state.errorPosts.errorPostsText = action.payload;
         },
         sendNewPostStart: (state, action) => {
@@ -39,7 +39,7 @@ export const postsReducer = createSlice({
         },
         sendNewPostFailure: (state, action) => {
             state.loadingPosts = false;
-            state.errorPosts.isError = true;
+            state.errorPosts.isErrorPosts = true;
             state.errorPosts.errorPostsText = action.payload;
         },
         changePostStart: (state, action) => {
@@ -56,7 +56,7 @@ export const postsReducer = createSlice({
         },
         changePostFailure: (state, action) => {
             state.loadingPosts = false;
-            state.errorPosts.isError = true;
+            state.errorPosts.isErrorPosts = true;
             state.errorPosts.errorPostsText = action.payload;
         },
         deletePostStart: (state, action) => {
@@ -69,8 +69,12 @@ export const postsReducer = createSlice({
         },
         deletePostFailure: (state, action) => {
             state.loadingPosts = false;
-            state.errorPosts.isError = true;
+            state.errorPosts.isErrorPosts = true;
             state.errorPosts.errorPostsText = action.payload;
+        },
+        removeError: (state) => {
+            state.errorPosts.isErrorPosts = false;
+            state.errorPosts.errorPostsText = '';
         },
     },
 });
@@ -88,4 +92,5 @@ export const {
     deletePostStart,
     deletePostSuccess,
     deletePostFailure,
+    removeError,
 } = postsReducer.actions;

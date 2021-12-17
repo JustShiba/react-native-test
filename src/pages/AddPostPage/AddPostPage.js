@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { Image, View } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { ArrowSend } from '../../../assets/componentIcons/arrowSend/ArrowSend';
 import { sendNewPostStart } from '../../redux/posts/postsReducer';
@@ -9,6 +9,7 @@ import { sendNewPostStart } from '../../redux/posts/postsReducer';
 export const AddPostPage = () => {
     const [postTitleAddPost, setPostTitleAddPost] = useState('');
     const [postBodyAddPost, setPostBodyAddPost] = useState('');
+    const { loadingPosts } = useSelector(state => state.posts);
     const dispatch = useDispatch();
 
     return (
@@ -18,33 +19,36 @@ export const AddPostPage = () => {
                 style={styles.oranreImg}
                 resizeMode="stretch"
             />
-            <View style={styles.addPostCard}>
-                <TextInput
-                    placeholder="Title of the post"
-                    style={styles.inputAddTitle}
-                    placeholderTextColor="rgba(0, 0, 0, 1)"
-                    autoCapitalize="none"
-                    defaultValue={postTitleAddPost}
-                    onChangeText={(text) => setPostTitleAddPost(text)}
-                />
-                <TextInput
-                    placeholder="Here you can write post's body"
-                    style={styles.inputAddBody}
-                    placeholderTextColor="rgba(0, 0, 0, 1)"
-                    autoCapitalize="none"
-                    defaultValue={postBodyAddPost}
-                    onChangeText={(text) => setPostBodyAddPost(text)}
-                    multiline={true}
-                />
-                <TouchableOpacity
-                    style={styles.arrowSendPost}
-                    onPress={() => {
-                        dispatch(sendNewPostStart({ postTitleAddPost, postBodyAddPost }));
-                    }}
-                >
-                    <ArrowSend />
-                </TouchableOpacity>
-            </View>
+            {loadingPosts ?
+                <ActivityIndicator size="large" color="#FAB15F" /> :
+                <View style={styles.addPostCard}>
+                    <TextInput
+                        placeholder="Title of the post"
+                        style={styles.inputAddTitle}
+                        placeholderTextColor="rgba(0, 0, 0, 1)"
+                        autoCapitalize="none"
+                        defaultValue={postTitleAddPost}
+                        onChangeText={(text) => setPostTitleAddPost(text)}
+                    />
+                    <TextInput
+                        placeholder="Here you can write post's body"
+                        style={styles.inputAddBody}
+                        placeholderTextColor="rgba(0, 0, 0, 1)"
+                        autoCapitalize="none"
+                        defaultValue={postBodyAddPost}
+                        onChangeText={(text) => setPostBodyAddPost(text)}
+                        multiline={true}
+                    />
+                    <TouchableOpacity
+                        style={styles.arrowSendPost}
+                        onPress={() => {
+                            dispatch(sendNewPostStart({ postTitleAddPost, postBodyAddPost }));
+                        }}
+                    >
+                        <ArrowSend />
+                    </TouchableOpacity>
+                </View>
+            }
         </View>
     );
 };

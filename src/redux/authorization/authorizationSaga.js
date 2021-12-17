@@ -1,4 +1,4 @@
-import { select, call, put } from 'redux-saga/effects';
+import { select, call, put, delay } from 'redux-saga/effects';
 
 import { localStore } from '../../secureStore/secureStore';
 import { apiCall } from '../../services/service';
@@ -7,6 +7,7 @@ import {
     checkLoginFinish,
     loginFailure,
     loginSuccess,
+    removeError,
     signupFailure,
     signupSuccess,
 } from './authorizationReducer';
@@ -21,6 +22,8 @@ export function* checkLoginSaga() {
         }
     } catch (error) {
         yield put(checkLoginFinish(false));
+        yield delay(3000);
+        yield put(removeError());
     }
 }
 
@@ -39,6 +42,8 @@ export function* loginSaga() {
         }
     } catch (error) {
         yield put(loginFailure(error.message));
+        yield delay(3000);
+        yield put(removeError());
     }
 }
 
@@ -55,6 +60,8 @@ export function* signupSaga() {
         }
     } catch (error) {
         yield put(signupFailure(error.message));
+        yield delay(3000);
+        yield put(removeError());
     }
 }
 

@@ -14,7 +14,7 @@ export const authorizationReducer = createSlice({
         loadingAuthorization: false,
         errorAuthorization: {
             errorAuthorizationText: '',
-            isError: false,
+            isErrorAuthorization: false,
         },
     },
     reducers: {
@@ -37,7 +37,7 @@ export const authorizationReducer = createSlice({
         },
         loginFailure: (state, action) => {
             state.loadingAuthorization = false;
-            state.errorAuthorization.isError = true;
+            state.errorAuthorization.isErrorAuthorization = true;
             state.errorAuthorization.errorAuthorizationText = action.payload;
             state.inputUserInformation.userAuthorizationInformation.email = '';
             state.inputUserInformation.userAuthorizationInformation.password = '';
@@ -55,13 +55,17 @@ export const authorizationReducer = createSlice({
         },
         signupFailure: (state, action) => {
             state.loadingAuthorization = false;
-            state.errorAuthorization.isError = true;
+            state.errorAuthorization.isErrorAuthorization = true;
             state.errorAuthorization.errorAuthorizationText = action.payload;
             state.inputUserInformation.userAuthorizationInformation.email = '';
             state.inputUserInformation.userAuthorizationInformation.password = '';
         },
         logout: (state) => {
             state.isAuthorized = false;
+        },
+        removeError: (state) => {
+            state.errorAuthorization.isErrorAuthorization = false;
+            state.errorAuthorization.errorAuthorizationText = '';
         },
     },
 });
@@ -76,4 +80,5 @@ export const {
     signupSuccess,
     signupFailure,
     logout,
+    removeError,
 } = authorizationReducer.actions;

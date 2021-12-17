@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, FlatList, StyleSheet, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Post } from '../../components/Post/Post';
@@ -15,15 +15,14 @@ export const PostsPage = () => {
     }, [dispatch]);
     return (
         <View>
-            {loadingPosts ? (
-                <Text>Loading</Text>
-            ) : (
+            {loadingPosts ?
+                <ActivityIndicator size="large" color="#FAB15F" /> :
                 <FlatList
                     data={allPosts}
                     renderItem={(post) => <Post postInformation={post} />}
                     keyExtractor={(post) => post.postId}
                 />
-            )}
+            }
         </View>
     );
 };

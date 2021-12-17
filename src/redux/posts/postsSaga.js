@@ -1,4 +1,4 @@
-import { put, select, call } from 'redux-saga/effects';
+import { put, select, call, delay } from 'redux-saga/effects';
 
 import { apiCall } from '../../services/service';
 import {
@@ -10,6 +10,7 @@ import {
     sendNewPostFailure,
     deletePostSuccess,
     deletePostFailure,
+    removeError,
 } from './postsReducer';
 import { addNamesToPosts } from './addNamesToPosts';
 
@@ -23,6 +24,8 @@ export function* sendPostSaga() {
         }
     } catch (error) {
         yield put(sendNewPostFailure(error.message));
+        yield delay(3000);
+        yield put(removeError());
     }
 }
 
@@ -39,6 +42,8 @@ export function* getAllPostsSaga() {
         }
     } catch (error) {
         yield put(getAllPostsFailure(error.message));
+        yield delay(3000);
+        yield put(removeError());
     }
 }
 
@@ -52,6 +57,8 @@ export function* changePostSaga() {
         }
     } catch (error) {
         yield put(changePostFailure(error.message));
+        yield delay(3000);
+        yield put(removeError());
     }
 }
 
@@ -65,5 +72,7 @@ export function* deletePostSaga() {
         }
     } catch (error) {
         yield put(deletePostFailure(error.message));
+        yield delay(3000);
+        yield put(removeError());
     }
 }
