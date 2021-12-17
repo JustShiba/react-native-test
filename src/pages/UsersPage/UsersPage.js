@@ -5,13 +5,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { User } from '../../components/User/User';
 import { getAllUsersStart } from '../../redux/users/usersReducer';
 
-export const UsersPage = () => {
+export const UsersPage = ({ navigation }) => {
     const { allUsers, loadingUsers } = useSelector((state) => state.users);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getAllUsersStart());
-    });
+        const unsubscribe = navigation.addListener('focus', () => {
+            dispatch(getAllUsersStart());
+        });
+
+        return unsubscribe;
+    }, [navigation]);
 
     return (
         <View>

@@ -22,8 +22,10 @@ export const UserAuthProfile = ({ route, navigation }) => {
 
     useEffect(async () => {
         const userId = userIdProp || (await localStore('get', USER__ID));
-        dispatch(getUserStart(userId));
-    }, [dispatch, userIdProp]);
+        navigation.addListener('focus', () => {
+            dispatch(getUserStart(userId));
+        });
+    }, [dispatch, userIdProp, navigation]);
 
     return (
         <View>

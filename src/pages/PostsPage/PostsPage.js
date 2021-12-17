@@ -6,13 +6,16 @@ import { Post } from '../../components/Post/Post';
 import { getAllPostsStart } from '../../redux/posts/postsReducer';
 import { getAllUsersStart } from '../../redux/users/usersReducer';
 
-export const PostsPage = () => {
+export const PostsPage = ({ navigation }) => {
     const dispatch = useDispatch();
     const { allPosts, loadingPosts } = useSelector((state) => state.posts);
     useEffect(() => {
-        dispatch(getAllUsersStart());
-        dispatch(getAllPostsStart());
-    }, [dispatch]);
+        navigation.addListener('focus', () => {
+            dispatch(getAllUsersStart());
+            dispatch(getAllPostsStart());
+        });
+
+    }, [dispatch, navigation]);
     return (
         <View>
             {loadingPosts ?
