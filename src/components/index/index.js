@@ -25,6 +25,7 @@ export const Index = () => {
             <AppLoading
                 startAsync={LoadFonts}
                 onFinish={() => SetIsReadyFonts(true)}
+                onError={() => { }}
             />
         );
     }
