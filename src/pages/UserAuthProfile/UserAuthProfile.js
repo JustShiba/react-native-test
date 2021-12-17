@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, StyleSheet, FlatList, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, FlatList, ActivityIndicator } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Post } from '../../components/Post/Post';
@@ -12,19 +12,29 @@ export const UserAuthProfile = ({ route, navigation }) => {
     const userIdProp = route.params?.userIdProp;
     const { loadingUsers } = useSelector((state) => state.users);
     const { email, nickname, phone, posts } = useSelector((state) => state.users.currentUserInformation);
+    const [needRefresh, setNeedRefresh] = useState(false);
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        navigation.addListener('tabPress', (e) => {
-            navigation.navigate('Profile');
+    useEffect(async () => {
+        const userId = userIdProp || (await localStore('get', USER__ID));
+        dispatch(getUserStart(userId));
+        setNeedRefresh(false);
+    }, [needRefresh]);
+
+    useEffect(async () => {
+        const userId = await localStore('get', USER__ID);
+        const unsubscribe = navigation.addListener('tabPress', (e) => {
+            dispatch(getUserStart(userId));
         });
+        return unsubscribe;
     }, [navigation]);
 
     useEffect(async () => {
         const userId = userIdProp || (await localStore('get', USER__ID));
-        navigation.addListener('focus', () => {
+        const unsubscribe = navigation.addListener('focus', () => {
             dispatch(getUserStart(userId));
         });
+        return unsubscribe;
     }, [dispatch, userIdProp, navigation]);
 
     return (
@@ -35,10 +45,15 @@ export const UserAuthProfile = ({ route, navigation }) => {
                 <View style={styles.box}>
                     <UserCard nickname={nickname} email={email} phone={phone} />
                     <FlatList
-                        data={posts}
-                        renderItem={(post) => <Post postInformation={post} userName={nickname} />}
-                        keyExtractor={(item) => item.postId}
                         style={styles.list}
+                        data={posts}
+                        renderItem={(post) =>
+                            <Post
+                                postInformation={post}
+                                userName={nickname}
+                                setNeedRefresh={setNeedRefresh}
+                            />}
+                        keyExtractor={(item) => item.postId}
                     />
                 </View>
             )}
@@ -48,11 +63,12 @@ export const UserAuthProfile = ({ route, navigation }) => {
 
 const styles = StyleSheet.create({
     box: {
+        height: '100%',
         backgroundColor: 'transparent',
     },
 
     list: {
         paddingTop: 5,
-        height: '80%',
+        height: '75%',
     },
 });

@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { ActivityIndicator, FlatList, StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, FlatList, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Post } from '../../components/Post/Post';
@@ -8,21 +8,25 @@ import { getAllUsersStart } from '../../redux/users/usersReducer';
 
 export const PostsPage = ({ navigation }) => {
     const dispatch = useDispatch();
+    const [needRefresh, setNeedRefresh] = useState(false);
     const { allPosts, loadingPosts } = useSelector((state) => state.posts);
+
     useEffect(() => {
-        navigation.addListener('focus', () => {
+        const unsubscribe = navigation.addListener('focus', () => {
             dispatch(getAllUsersStart());
             dispatch(getAllPostsStart());
         });
+        setNeedRefresh(false);
+        return unsubscribe;
+    }, [navigation, needRefresh]);
 
-    }, [dispatch, navigation]);
     return (
         <View>
             {loadingPosts ?
                 <ActivityIndicator size="large" color="#FAB15F" /> :
                 <FlatList
                     data={allPosts}
-                    renderItem={(post) => <Post postInformation={post} />}
+                    renderItem={(post) => <Post postInformation={post} setNeedRefresh={setNeedRefresh} />}
                     keyExtractor={(post) => post.postId}
                 />
             }
@@ -30,8 +34,3 @@ export const PostsPage = ({ navigation }) => {
     );
 };
 
-const styles = StyleSheet.create({
-    allPostsBox: {
-        paddingTop: 15,
-    },
-});

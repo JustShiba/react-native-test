@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, Modal, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 
 import { ArrowBackComments } from '../../../assets/componentIcons/arrowBackComments/ArrowBackComments';
 import { ConfirmIcon } from '../../../assets/componentIcons/confirm/ConfirmIcon';
@@ -13,6 +14,7 @@ import { logout } from '../../redux/authorization/authorizationReducer';
 import { ModalError } from '../ModalError/ModalError';
 
 export const ModalEditUser = ({ modalEditUserVisible, setModalEditUserVisible }) => {
+    const navigation = useNavigation();
     const [newNickname, setNewNickname] = useState('');
     const [newPhone, setNewPhone] = useState('');
     const [currentUserId, setCurrentUserId] = useState('');
@@ -39,8 +41,9 @@ export const ModalEditUser = ({ modalEditUserVisible, setModalEditUserVisible })
                         <TouchableOpacity
                             style={styles.saveData}
                             onPress={() => {
-                                setModalEditUserVisible(!modalEditUserVisible)
-                                dispatch(changeUserDataStart({ newNickname, newPhone, currentUserId }))
+                                setModalEditUserVisible(!modalEditUserVisible);
+                                dispatch(changeUserDataStart({ newNickname, newPhone, currentUserId }));
+                                navigation.navigate('Profile');
                             }}
                         >
                             <ConfirmIcon />
@@ -91,7 +94,7 @@ export const ModalEditUser = ({ modalEditUserVisible, setModalEditUserVisible })
                     }
                 </View>
                 <ModalError />
-            </Modal>
-        </View>
+            </Modal >
+        </View >
     );
 };

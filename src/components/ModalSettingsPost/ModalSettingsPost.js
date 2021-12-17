@@ -16,7 +16,8 @@ export const ModalSettingsPost = ({
     modalPostSettingsVisible,
     setModalPostSettingsVisible,
     setIsChangeCurrentPost,
-    postId
+    postId,
+    setNeedRefresh,
 }) => {
     const dispatch = useDispatch();
 
@@ -42,6 +43,7 @@ export const ModalSettingsPost = ({
                             onPress={() => {
                                 setModalPostSettingsVisible(false);
                                 dispatch(deletePostStart(postId));
+                                setNeedRefresh(true);
                             }}>
                             <Text style={[styles.settingDelete, styles.settingText]}>Delete post</Text>
                         </TouchableOpacity>

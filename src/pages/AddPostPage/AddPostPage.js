@@ -10,6 +10,7 @@ export const AddPostPage = () => {
     const [postTitleAddPost, setPostTitleAddPost] = useState('');
     const [postBodyAddPost, setPostBodyAddPost] = useState('');
     const { loadingPosts } = useSelector(state => state.posts);
+    const { title, body } = useSelector(state => state.posts.inputPostsInformation)
     const dispatch = useDispatch();
 
     return (

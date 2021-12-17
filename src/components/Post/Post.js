@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, Image, TouchableOpacity, TextInput } from 'react-native';
 import { useDispatch } from 'react-redux';
 
+import { localStore } from '../../secureStore/secureStore';
+import { USER__ID } from '../../redux/constances/constances';
 import { CommentsIcon } from '../../../assets/componentIcons/comments/CommentsIcon';
 import { styles } from './postStyles';
 import { EditIcon } from '../../../assets/componentIcons/edit/EditIcon';
@@ -10,14 +12,20 @@ import { ModalSettingsPost } from '../ModalSettingsPost/ModalSettingsPost';
 import { ArrowSend } from '../../../assets/componentIcons/arrowSend/ArrowSend';
 import { changePostStart } from '../../redux/posts/postsReducer';
 
-export const Post = ({ postInformation, userName }) => {
-    const { body, title, comments, nickname, postId } = postInformation.item;
+export const Post = ({ postInformation, userName, setNeedRefresh }) => {
+    const { body, title, comments, nickname, postId, userId } = postInformation.item;
     const [modalVisible, setModalVisible] = useState(false);
     const [modalPostSettingsVisible, setModalPostSettingsVisible] = useState(false);
     const [isChangeCurrentPost, setIsChangeCurrentPost] = useState(false);
     const [newPostTitle, setNewPostTitle] = useState(title);
     const [newPostBody, setNewPostBody] = useState(body);
+    const [isUserPost, setIsUserPost] = useState(false);
     const dispatch = useDispatch();
+
+    useEffect(async () => {
+        const currentUserId = await localStore('get', USER__ID);
+        if (currentUserId === userId) { setIsUserPost(true) };
+    }, []);
 
     return (
         <View style={styles.postBox}>
@@ -61,10 +69,14 @@ export const Post = ({ postInformation, userName }) => {
                 style={styles.postBackground}
                 source={require('../../../assets/images/PostBG.png')}
             />
-            {isChangeCurrentPost ?
+            {isUserPost ? isChangeCurrentPost ?
                 <TouchableOpacity
                     style={styles.EditPostIcon}
-                    onPress={() => dispatch(changePostStart({ newPostTitle, newPostBody, postId }))}
+                    onPress={() => {
+                        setIsChangeCurrentPost(false);
+                        dispatch(changePostStart({ newPostTitle, newPostBody, postId }));
+                        setNeedRefresh(true);
+                    }}
                 >
                     <ArrowSend />
                 </TouchableOpacity> :
@@ -73,7 +85,7 @@ export const Post = ({ postInformation, userName }) => {
                     onPress={() => setModalPostSettingsVisible(!modalPostSettingsVisible)}
                 >
                     <EditIcon />
-                </TouchableOpacity>}
+                </TouchableOpacity> : null}
 
             <TouchableOpacity
                 style={styles.postCommentsIcon}
@@ -97,6 +109,7 @@ export const Post = ({ postInformation, userName }) => {
                     setModalPostSettingsVisible={setModalPostSettingsVisible}
                     setIsChangeCurrentPost={setIsChangeCurrentPost}
                     postId={postId}
+                    setNeedRefresh={setNeedRefresh}
                 /> :
                 null
             }

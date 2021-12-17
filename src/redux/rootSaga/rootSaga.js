@@ -1,4 +1,4 @@
-import { takeEvery, all } from 'redux-saga/effects';
+import { takeEvery, all, takeLatest } from 'redux-saga/effects';
 
 import { checkLoginStart, loginStart, logout, signupStart } from '../authorization/authorizationReducer';
 import { checkLoginSaga, loginSaga, logoutSaga, signupSaga } from '../authorization/authorizationSaga';
@@ -14,7 +14,7 @@ export default function* rootSaga() {
         yield takeEvery(checkLoginStart, checkLoginSaga),
         yield takeEvery(loginStart, loginSaga),
         yield takeEvery(signupStart, signupSaga),
-        yield takeEvery(getUserStart, getUserSaga),
+        yield takeLatest(getUserStart, getUserSaga),
         yield takeEvery(sendNewPostStart, sendPostSaga),
         yield takeEvery(getAllUsersStart, getAllUsersSaga),
         yield takeEvery(getAllPostsStart, getAllPostsSaga),

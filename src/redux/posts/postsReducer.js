@@ -35,7 +35,8 @@ export const postsReducer = createSlice({
         },
         sendNewPostSuccess: (state) => {
             state.loadingPosts = false;
-            state.inputPostsInformation = '';
+            state.inputPostsInformation.title = '';
+            state.inputPostsInformation.body = '';
         },
         sendNewPostFailure: (state, action) => {
             state.loadingPosts = false;
