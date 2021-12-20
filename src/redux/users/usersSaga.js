@@ -1,4 +1,4 @@
-import { call, put, delay } from 'redux-saga/effects';
+import { call, put, delay, select } from 'redux-saga/effects';
 
 import { apiCall } from '../../services/service';
 import { logout } from '../authorization/authorizationReducer';
@@ -12,6 +12,8 @@ import {
     changeUserDataSuccess,
     changeUserDataFailure,
     removeError,
+    updateUserPostFinish,
+    userAddCommentFinish,
 } from './usersReducer';
 
 export function* getUserSaga(args) {
@@ -67,12 +69,27 @@ export function* changeUserDataSaga(args) {
         ]);
 
         if (response.status === 200) {
-            console.log(response);
             yield put(changeUserDataSuccess(response.data));
         }
     } catch (error) {
         yield put(changeUserDataFailure(error.message));
         yield delay(3000);
         yield put(removeError());
+    }
+}
+
+export function* updateUserPostSaga(args) {
+    const { posts } = yield select((state) => state.users.currentUserInformation);
+    for (let i = 0; i < posts.length; i++) {
+        if (posts[i].postId === args.payload.postId)
+            yield put(updateUserPostFinish({ index: i, post: args.payload }));
+    }
+}
+
+export function* addUserCommentSaga(args) {
+    const { posts } = yield select((state) => state.users.currentUserInformation);
+    const { postId, comment } = args.payload;
+    for (let i = 0; i < posts.length; i++) {
+        if (posts[i].postId === postId) yield put(userAddCommentFinish({ index: i, comment }));
     }
 }

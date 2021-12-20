@@ -8,17 +8,19 @@ import { getAllUsersStart } from '../../redux/users/usersReducer';
 
 export const PostsPage = ({ navigation }) => {
     const dispatch = useDispatch();
-    const [needRefresh, setNeedRefresh] = useState(false);
     const { allPosts, loadingPosts } = useSelector((state) => state.posts);
+
+    const getPostsWithUsers = () => {
+        dispatch(getAllUsersStart());
+        dispatch(getAllPostsStart());
+    };
 
     useEffect(() => {
         const unsubscribe = navigation.addListener('focus', () => {
-            dispatch(getAllUsersStart());
-            dispatch(getAllPostsStart());
+            getPostsWithUsers();
         });
-        setNeedRefresh(false);
         return unsubscribe;
-    }, [navigation, needRefresh]);
+    });
 
     return (
         <View>
@@ -27,9 +29,7 @@ export const PostsPage = ({ navigation }) => {
             ) : (
                 <FlatList
                     data={allPosts}
-                    renderItem={(post) => (
-                        <Post postInformation={post} setNeedRefresh={setNeedRefresh} />
-                    )}
+                    renderItem={(post) => <Post postInformation={post} />}
                     keyExtractor={(post) => post.postId}
                 />
             )}

@@ -22,20 +22,33 @@ import {
     changePostStart,
     deletePostStart,
     getAllPostsStart,
+    postAddCommentStart,
     sendNewPostStart,
+    updateAllPostsStart,
 } from '../posts/postsReducer';
-import { changePostSaga, deletePostSaga, getAllPostsSaga, sendPostSaga } from '../posts/postsSaga';
+import {
+    addPostsCommentSaga,
+    changePostSaga,
+    deletePostSaga,
+    getAllPostsSaga,
+    sendPostSaga,
+    updateAllPostsSaga,
+} from '../posts/postsSaga';
 import {
     changeUserDataStart,
     deleteUserStart,
     getAllUsersStart,
     getUserStart,
+    updateUserPostStart,
+    userAddCommentStart,
 } from '../users/usersReducer';
 import {
+    addUserCommentSaga,
     changeUserDataSaga,
     deleteUserSaga,
     getAllUsersSaga,
     getUserSaga,
+    updateUserPostSaga,
 } from '../users/usersSaga';
 
 export default function* rootSaga() {
@@ -55,5 +68,9 @@ export default function* rootSaga() {
         yield takeEvery(deleteUserStart, deleteUserSaga),
         yield takeEvery(changeUserDataStart, changeUserDataSaga),
         yield takeEvery(logout, logoutSaga),
+        yield takeEvery(updateUserPostStart, updateUserPostSaga),
+        yield takeEvery(updateAllPostsStart, updateAllPostsSaga),
+        yield takeEvery(userAddCommentStart, addUserCommentSaga),
+        yield takeEvery(postAddCommentStart, addPostsCommentSaga),
     ]);
 }

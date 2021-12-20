@@ -11,7 +11,7 @@ export const ModalSettingsPost = ({
     setModalPostSettingsVisible,
     setIsChangeCurrentPost,
     postId,
-    setNeedRefresh,
+    path,
 }) => {
     const dispatch = useDispatch();
 
@@ -33,8 +33,7 @@ export const ModalSettingsPost = ({
                             style={styles.setting}
                             onPress={() => {
                                 setModalPostSettingsVisible(false);
-                                dispatch(deletePostStart(postId));
-                                setNeedRefresh(true);
+                                dispatch(deletePostStart({ postId, path }));
                             }}
                         >
                             <Text style={[styles.settingDelete, styles.settingText]}>

@@ -12,7 +12,7 @@ import { ModalSettingsPost } from '../ModalSettingsPost/ModalSettingsPost';
 import { ArrowSend } from '../../../assets/componentIcons/arrowSend/ArrowSend';
 import { changePostStart } from '../../redux/posts/postsReducer';
 
-export const Post = ({ postInformation, userName }) => {
+export const Post = ({ postInformation, userName, path }) => {
     const { body, title, comments, nickname, postId, userId } = postInformation.item;
     const [modalVisible, setModalVisible] = useState(false);
     const [modalPostSettingsVisible, setModalPostSettingsVisible] = useState(false);
@@ -77,7 +77,7 @@ export const Post = ({ postInformation, userName }) => {
                         style={styles.EditPostIcon}
                         onPress={() => {
                             setIsChangeCurrentPost(false);
-                            dispatch(changePostStart({ newPostTitle, newPostBody, postId }));
+                            dispatch(changePostStart({ newPostTitle, newPostBody, postId, path }));
                         }}
                     >
                         <ArrowSend />
@@ -105,6 +105,7 @@ export const Post = ({ postInformation, userName }) => {
                     commentsInformation={comments}
                     postId={postId}
                     userNickname={userName || nickname || 'No name'}
+                    path={path}
                 />
             ) : null}
             {modalPostSettingsVisible ? (
@@ -113,7 +114,7 @@ export const Post = ({ postInformation, userName }) => {
                     setModalPostSettingsVisible={setModalPostSettingsVisible}
                     setIsChangeCurrentPost={setIsChangeCurrentPost}
                     postId={postId}
-                    setNeedRefresh={setNeedRefresh}
+                    path={path}
                 />
             ) : null}
         </View>

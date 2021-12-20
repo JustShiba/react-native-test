@@ -24,6 +24,7 @@ export const ModalComments = ({
     commentsInformation,
     postId,
     userNickname,
+    path,
 }) => {
     const [addCommentText, setAddCommentText] = useState('');
     const { loadingComments } = useSelector((state) => state.comments);
@@ -73,9 +74,10 @@ export const ModalComments = ({
                             onChangeText={(text) => setAddCommentText(text)}
                         />
                         <TouchableOpacity
-                            onPress={() =>
-                                dispatch(sendNewCommentStart({ addCommentText, postId }))
-                            }
+                            onPress={() => {
+                                dispatch(sendNewCommentStart({ addCommentText, postId, path }));
+                                setAddCommentText('');
+                            }}
                         >
                             <ArrowSend />
                         </TouchableOpacity>

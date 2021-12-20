@@ -39,7 +39,9 @@ export const UserAuthProfile = ({ route, navigation }) => {
                     <FlatList
                         style={styles.list}
                         data={posts}
-                        renderItem={(post) => <Post postInformation={post} userName={nickname} />}
+                        renderItem={(post) => (
+                            <Post postInformation={post} userName={nickname} path="user" />
+                        )}
                         keyExtractor={(item) => item.postId}
                     />
                 </View>
