@@ -19,7 +19,6 @@ const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 export const Navigation = ({ autorized }) => {
-
     return (
         <NavigationContainer>
             {autorized ? (

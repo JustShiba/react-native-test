@@ -13,10 +13,9 @@ import {
     removeError,
 } from './usersReducer';
 
-export function* getUserSaga() {
-    const { selectedUserId } = yield select((state) => state.users);
+export function* getUserSaga(args) {
     try {
-        const response = yield call(apiCall, [`get`, `users/${selectedUserId}`]);
+        const response = yield call(apiCall, [`get`, `users/${args.payload}`]);
 
         if (response.status === 200) {
             yield put(getUserSuccess(response.data));
@@ -42,10 +41,10 @@ export function* getAllUsersSaga() {
     }
 }
 
-export function* deleteUserSaga() {
+export function* deleteUserSaga(args) {
     const { selectedUserId } = yield select((state) => state.users);
     try {
-        const response = yield call(apiCall, [`delete`, `users/${selectedUserId}`]);
+        const response = yield call(apiCall, [`delete`, `users/${args.payload}`]);
 
         if (response.status === 200) {
             yield put(deleteUserSuccess());
@@ -57,13 +56,17 @@ export function* deleteUserSaga() {
     }
 }
 
-export function* changeUserDataSaga() {
-    const { selectedUserId } = yield select((state) => state.users);
-    const { userInputInformation } = yield select((state) => state.users);
+export function* changeUserDataSaga(args) {
+    const { newNickname, newPhone, currentUserId } = args.payload;
     try {
-        const response = yield call(apiCall, [`patch`, `users/${selectedUserId}`, userInputInformation]);
+        const response = yield call(apiCall, [
+            `patch`,
+            `users/${currentUserId}`,
+            { nickname: newNickname, phone: newPhone },
+        ]);
 
         if (response.status === 200) {
+            console.log(response);
             yield put(changeUserDataSuccess());
         }
     } catch (error) {

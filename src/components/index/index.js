@@ -10,7 +10,7 @@ import { checkLoginStart } from '../../redux/authorization/authorizationReducer'
 export const Index = () => {
     const [IsReadyFonts, SetIsReadyFonts] = useState(false);
     const dispatch = useDispatch();
-    const { isAuthorized } = useSelector(state => state.authorization);
+    const { isAuthorized } = useSelector((state) => state.authorization);
 
     useEffect(() => {
         dispatch(checkLoginStart());
@@ -25,7 +25,7 @@ export const Index = () => {
             <AppLoading
                 startAsync={LoadFonts}
                 onFinish={() => SetIsReadyFonts(true)}
-                onError={() => { }}
+                onError={() => {}}
             />
         );
     }

@@ -1,28 +1,28 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
     centeredView: {
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        marginTop: 22
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 22,
     },
     modalView: {
         width: 200,
         height: 125,
         paddingTop: 7,
         paddingBottom: 7,
-        backgroundColor: "white",
+        backgroundColor: 'white',
         borderRadius: 20,
         justifyContent: 'space-between',
-        shadowColor: "#000",
+        shadowColor: '#000',
         shadowOffset: {
             width: 0,
-            height: 2
+            height: 2,
         },
         shadowOpacity: 0.25,
         shadowRadius: 4,
-        elevation: 5
+        elevation: 5,
     },
     setting: {
         alignItems: 'center',
@@ -35,5 +35,5 @@ export const styles = StyleSheet.create({
     },
     settingDelete: {
         color: '#DE4E65',
-    }
+    },
 });

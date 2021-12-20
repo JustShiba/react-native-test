@@ -22,15 +22,17 @@ export const PostsPage = ({ navigation }) => {
 
     return (
         <View>
-            {loadingPosts ?
-                <ActivityIndicator size="large" color="#FAB15F" /> :
+            {loadingPosts ? (
+                <ActivityIndicator size="large" color="#FAB15F" />
+            ) : (
                 <FlatList
                     data={allPosts}
-                    renderItem={(post) => <Post postInformation={post} setNeedRefresh={setNeedRefresh} />}
+                    renderItem={(post) => (
+                        <Post postInformation={post} setNeedRefresh={setNeedRefresh} />
+                    )}
                     keyExtractor={(post) => post.postId}
                 />
-            }
+            )}
         </View>
     );
 };
-

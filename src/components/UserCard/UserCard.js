@@ -77,5 +77,5 @@ const styles = StyleSheet.create({
     userPhone: {
         fontFamily: 'Overlock_Bold',
         fontSize: 14,
-    }
+    },
 });

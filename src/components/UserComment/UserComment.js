@@ -18,12 +18,14 @@ export const UserComment = ({ textComment, userComment, postId, commentId }) => 
 
     useEffect(async () => {
         const currentUserId = await localStore('get', USER__ID);
-        if (currentUserId === userComment) { setIsUserComment(true) };
+        if (currentUserId === userComment) {
+            setIsUserComment(true);
+        }
     }, []);
 
     return (
         <View style={styles.commentBox}>
-            {isChangeCurrentComment ?
+            {isChangeCurrentComment ? (
                 <TextInput
                     style={styles.changeCommentInput}
                     placeholderTextColor="#A7A7A7"
@@ -31,11 +33,10 @@ export const UserComment = ({ textComment, userComment, postId, commentId }) => 
                     autoCapitalize="none"
                     defaultValue={changeComment}
                     onChangeText={(text) => setChangeComment(text)}
-                /> :
-                <Text style={styles.textComment}>
-                    {textComment}
-                </Text>
-            }
+                />
+            ) : (
+                <Text style={styles.textComment}>{textComment}</Text>
+            )}
             <ModalSettingsComment
                 modalCommentSettings={modalCommentSettings}
                 setModalCommentSettings={setModalCommentSettings}
@@ -43,24 +44,28 @@ export const UserComment = ({ textComment, userComment, postId, commentId }) => 
                 postId={postId}
                 commentId={commentId}
             />
-            {isUserComment ?
-                isChangeCurrentComment ?
-                    <TouchableOpacity onPress={() => {
-                        setIsChangeCurrentComment(false);
-                        dispatch(changeCommentStart({ changeComment, postId, commentId }));
-                    }}>
+            {isUserComment ? (
+                isChangeCurrentComment ? (
+                    <TouchableOpacity
+                        onPress={() => {
+                            setIsChangeCurrentComment(false);
+                            dispatch(changeCommentStart({ changeComment, postId, commentId }));
+                        }}
+                    >
                         <ArrowSend />
-                    </TouchableOpacity> :
+                    </TouchableOpacity>
+                ) : (
                     <TouchableOpacity
                         style={styles.buttonSettings}
-                        onPress={() => setModalCommentSettings(!modalCommentSettings)}>
+                        onPress={() => setModalCommentSettings(!modalCommentSettings)}
+                    >
                         <EditIcon />
-                    </TouchableOpacity> :
-                null
-            }
+                    </TouchableOpacity>
+                )
+            ) : null}
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     commentBox: {
@@ -89,6 +94,6 @@ const styles = StyleSheet.create({
         height: 40,
         borderColor: '#ECECEC',
         borderRadius: 10,
-        borderWidth: 2
-    }
-})
+        borderWidth: 2,
+    },
+});

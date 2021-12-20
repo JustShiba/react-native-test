@@ -1,13 +1,42 @@
 import { takeEvery, all, takeLatest } from 'redux-saga/effects';
 
-import { checkLoginStart, loginStart, logout, signupStart } from '../authorization/authorizationReducer';
-import { checkLoginSaga, loginSaga, logoutSaga, signupSaga } from '../authorization/authorizationSaga';
-import { changeCommentStart, deleteCommentStart, sendNewCommentStart } from '../comments/commentsReducer';
+import {
+    checkLoginStart,
+    loginStart,
+    logout,
+    signupStart,
+} from '../authorization/authorizationReducer';
+import {
+    checkLoginSaga,
+    loginSaga,
+    logoutSaga,
+    signupSaga,
+} from '../authorization/authorizationSaga';
+import {
+    changeCommentStart,
+    deleteCommentStart,
+    sendNewCommentStart,
+} from '../comments/commentsReducer';
 import { changeCommentSaga, deleteCommentSaga, sendNewCommentSaga } from '../comments/commentsSaga';
-import { changePostStart, deletePostStart, getAllPostsStart, sendNewPostStart } from '../posts/postsReducer';
+import {
+    changePostStart,
+    deletePostStart,
+    getAllPostsStart,
+    sendNewPostStart,
+} from '../posts/postsReducer';
 import { changePostSaga, deletePostSaga, getAllPostsSaga, sendPostSaga } from '../posts/postsSaga';
-import { changeUserDataStart, deleteUserStart, getAllUsersStart, getUserStart } from '../users/usersReducer';
-import { changeUserDataSaga, deleteUserSaga, getAllUsersSaga, getUserSaga } from '../users/usersSaga';
+import {
+    changeUserDataStart,
+    deleteUserStart,
+    getAllUsersStart,
+    getUserStart,
+} from '../users/usersReducer';
+import {
+    changeUserDataSaga,
+    deleteUserSaga,
+    getAllUsersSaga,
+    getUserSaga,
+} from '../users/usersSaga';
 
 export default function* rootSaga() {
     yield all([

@@ -19,14 +19,15 @@ export const UsersPage = ({ navigation }) => {
 
     return (
         <View>
-            {loadingUsers ?
-                <ActivityIndicator size="large" color="#FAB15F" /> :
+            {loadingUsers ? (
+                <ActivityIndicator size="large" color="#FAB15F" />
+            ) : (
                 <FlatList
                     data={allUsers}
                     renderItem={(user) => <User userInformation={user} />}
                     keyExtractor={(user) => user.userId}
                 />
-            }
+            )}
         </View>
     );
 };

@@ -17,14 +17,12 @@ export const Header = () => {
                     <SettingsIconNotActive />
                 </TouchableOpacity>
             </View>
-            {modalEditUserVisible ?
+            {modalEditUserVisible ? (
                 <ModalEditUser
                     modalEditUserVisible={modalEditUserVisible}
                     setModalEditUserVisible={setModalEditUserVisible}
-                /> :
-
-                null
-            }
+                />
+            ) : null}
         </SafeAreaView>
     );
 };
@@ -34,7 +32,7 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         alignItems: 'center',
         width: '100%',
-        backgroundColor: 'transparent'
+        backgroundColor: 'transparent',
     },
     headerBox: {
         flexDirection: 'row',

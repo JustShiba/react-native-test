@@ -7,18 +7,16 @@ import { styles } from './loginStyles';
 import { loginStart } from '../../redux/authorization/authorizationReducer';
 
 export const LoginPage = ({ navigation }) => {
-    const { userAuthorizationInformation } = useSelector(
-        (state) => state.authorization.inputUserInformation,
-    );
-    const [userEmail, setuserEmail] = useState(userAuthorizationInformation.email);
-    const [userPassword, setUserPassword] = useState(userAuthorizationInformation.password);
-    const { loadingAuthorization } = useSelector(state => state.authorization);
+    const [userEmail, setuserEmail] = useState('');
+    const [userPassword, setUserPassword] = useState('');
+    const { loadingAuthorization } = useSelector((state) => state.authorization);
     const dispatch = useDispatch();
 
     return (
         <View>
-            {loadingAuthorization ?
-                <ActivityIndicator size="large" color="#FAB15F" /> :
+            {loadingAuthorization ? (
+                <ActivityIndicator size="large" color="#FAB15F" />
+            ) : (
                 <View>
                     <Image
                         style={styles.orangeLine}
@@ -76,7 +74,8 @@ export const LoginPage = ({ navigation }) => {
                     <View style={styles.boxTitleAuthorization}>
                         <Text style={styles.titleAuthorization}>Log in</Text>
                     </View>
-                </View>}
+                </View>
+            )}
         </View>
     );
 };

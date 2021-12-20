@@ -3,71 +3,42 @@ import { createSlice } from '@reduxjs/toolkit';
 export const commentsReducer = createSlice({
     name: 'commentsReducer',
     initialState: {
-        inputCommentInformation: {
-            body: '',
-            postId: '',
-            commentId: '',
-        },
         loadingComments: false,
-        errorComments: {
-            errorCommentsText: '',
-            isErrorComments: false,
-        },
+        errorComments: '',
     },
     reducers: {
-        sendNewCommentStart: (state, action) => {
+        sendNewCommentStart: (state) => {
             state.loadingComments = true;
-            state.inputCommentInformation.body = action.payload.addCommentText;
-            state.inputCommentInformation.postId = action.payload.postId;
         },
         sendNewCommentSuccess: (state) => {
             state.loadingComments = false;
-            state.inputCommentInformation.body = '';
-            state.inputCommentInformation.postId = '';
         },
         sendNewCommentFailure: (state, action) => {
             state.loadingComments = false;
-            state.errorComments.isErrorComments = true;
-            state.errorComments.errorCommentsText = action.payload;
+            state.errorComments = action.payload;
         },
-        changeCommentStart: (state, action) => {
-            const { changeComment, postId, commentId } = action.payload;
+        changeCommentStart: (state) => {
             state.loadingComments = true;
-            state.inputCommentInformation.body = changeComment;
-            state.inputCommentInformation.postId = postId;
-            state.inputCommentInformation.commentId = commentId;
         },
         changeCommentSuccess: (state) => {
             state.loadingComments = false;
-            state.inputCommentInformation.body = '';
-            state.inputCommentInformation.postId = '';
-            state.inputCommentInformation.commentId = '';
         },
         changeCommentFailure: (state, action) => {
             state.loadingComments = false;
-            state.errorComments.isErrorComments = true;
-            state.errorComments.errorCommentsText = action.payload;
+            state.errorComments = action.payload;
         },
-        deleteCommentStart: (state, action) => {
+        deleteCommentStart: (state) => {
             state.loadingComments = true;
-            state.inputCommentInformation.postId = action.payload.postId;
-            state.inputCommentInformation.commentId = action.payload.commentId;
         },
         deleteCommentSuccess: (state) => {
             state.loadingComments = false;
-            state.inputCommentInformation.postId = '';
-            state.inputCommentInformation.commentId = '';
         },
         deleteCommentFailure: (state, action) => {
             state.loadingComments = false;
-            state.errorComments.isErrorComments = true;
-            state.errorComments.errorCommentsText = action.payload;
-            state.inputCommentInformation.postId = '';
-            state.inputCommentInformation.commentId = '';
+            state.errorComments = action.payload;
         },
         removeError: (state) => {
-            state.errorComments.isErrorComments = false;
-            state.errorComments.errorCommentsText = '';
+            state.errorComments = '';
         },
     },
 });

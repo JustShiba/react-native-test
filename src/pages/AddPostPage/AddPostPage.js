@@ -9,8 +9,7 @@ import { sendNewPostStart } from '../../redux/posts/postsReducer';
 export const AddPostPage = () => {
     const [postTitleAddPost, setPostTitleAddPost] = useState('');
     const [postBodyAddPost, setPostBodyAddPost] = useState('');
-    const { loadingPosts } = useSelector(state => state.posts);
-    const { title, body } = useSelector(state => state.posts.inputPostsInformation)
+    const { loadingPosts } = useSelector((state) => state.posts);
     const dispatch = useDispatch();
 
     return (
@@ -20,8 +19,9 @@ export const AddPostPage = () => {
                 style={styles.oranreImg}
                 resizeMode="stretch"
             />
-            {loadingPosts ?
-                <ActivityIndicator size="large" color="#FAB15F" /> :
+            {loadingPosts ? (
+                <ActivityIndicator size="large" color="#FAB15F" />
+            ) : (
                 <View style={styles.addPostCard}>
                     <TextInput
                         placeholder="Title of the post"
@@ -49,7 +49,7 @@ export const AddPostPage = () => {
                         <ArrowSend />
                     </TouchableOpacity>
                 </View>
-            }
+            )}
         </View>
     );
 };

@@ -11,7 +11,9 @@ import { localStore } from '../../secureStore/secureStore';
 export const UserAuthProfile = ({ route, navigation }) => {
     const userIdProp = route.params?.userIdProp;
     const { loadingUsers } = useSelector((state) => state.users);
-    const { email, nickname, phone, posts } = useSelector((state) => state.users.currentUserInformation);
+    const { email, nickname, phone, posts } = useSelector(
+        (state) => state.users.currentUserInformation,
+    );
     const [needRefresh, setNeedRefresh] = useState(false);
     const dispatch = useDispatch();
 
@@ -47,12 +49,13 @@ export const UserAuthProfile = ({ route, navigation }) => {
                     <FlatList
                         style={styles.list}
                         data={posts}
-                        renderItem={(post) =>
+                        renderItem={(post) => (
                             <Post
                                 postInformation={post}
                                 userName={nickname}
                                 setNeedRefresh={setNeedRefresh}
-                            />}
+                            />
+                        )}
                         keyExtractor={(item) => item.postId}
                     />
                 </View>

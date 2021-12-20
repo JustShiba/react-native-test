@@ -14,10 +14,15 @@ import {
 } from './postsReducer';
 import { addNamesToPosts } from './addNamesToPosts';
 
-export function* sendPostSaga() {
-    const { title, body } = yield select((state) => state.posts.inputPostsInformation);
+export function* sendPostSaga(args) {
+    const { postTitleAddPost, postBodyAddPost } = args.payload;
+
     try {
-        const response = yield call(apiCall, [`post`, `posts`, { title, body }]);
+        const response = yield call(apiCall, [
+            `post`,
+            `posts`,
+            { title: postTitleAddPost, body: postBodyAddPost },
+        ]);
 
         if (response.status === 200) {
             yield put(sendNewPostSuccess());
@@ -47,10 +52,15 @@ export function* getAllPostsSaga() {
     }
 }
 
-export function* changePostSaga() {
-    const { title, body, postId } = yield select(state => state.posts.inputPostsInformation)
+export function* changePostSaga(args) {
+    const { newPostTitle, newPostBody, postId } = args.payload;
+
     try {
-        const response = yield call(apiCall, [`put`, `posts/${postId}`, { title, body }]);
+        const response = yield call(apiCall, [
+            `put`,
+            `posts/${postId}`,
+            { title: newPostTitle, body: newPostBody },
+        ]);
 
         if (response.status === 200) {
             yield put(changePostSuccess());
@@ -62,10 +72,9 @@ export function* changePostSaga() {
     }
 }
 
-export function* deletePostSaga() {
-    const { postId } = yield select(state => state.posts.inputPostsInformation)
+export function* deletePostSaga(args) {
     try {
-        const response = yield call(apiCall, [`delete`, `posts/${postId}`]);
+        const response = yield call(apiCall, [`delete`, `posts/${args.payload}`]);
 
         if (response.status === 200) {
             yield put(deletePostSuccess());

@@ -1,4 +1,4 @@
-import { select, call, put, delay } from 'redux-saga/effects';
+import { call, put, delay } from 'redux-saga/effects';
 
 import { localStore } from '../../secureStore/secureStore';
 import { apiCall } from '../../services/service';
@@ -27,13 +27,15 @@ export function* checkLoginSaga() {
     }
 }
 
-export function* loginSaga() {
-    const authorizationInformation = yield select(
-        (state) => state.authorization.inputUserInformation.userAuthorizationInformation,
-    );
+export function* loginSaga(args) {
+    const { userEmail, userPassword } = args.payload;
 
     try {
-        const response = yield call(apiCall, [`post`, `login`, authorizationInformation]);
+        const response = yield call(apiCall, [
+            `post`,
+            `login`,
+            { email: userEmail, password: userPassword },
+        ]);
 
         if (response.status === 200) {
             yield put(loginSuccess(response.data));
@@ -47,13 +49,15 @@ export function* loginSaga() {
     }
 }
 
-export function* signupSaga() {
-    const authorizationInformation = yield select(
-        (state) => state.authorization.inputUserInformation.userAuthorizationInformation,
-    );
+export function* signupSaga(args) {
+    const { userEmail, userPassword } = args.payload;
 
     try {
-        const response = yield call(apiCall, [`post`, `signup`, authorizationInformation]);
+        const response = yield call(apiCall, [
+            `post`,
+            `signup`,
+            { email: userEmail, password: userPassword },
+        ]);
 
         if (response.status === 200) {
             yield put(signupSuccess(response.data));

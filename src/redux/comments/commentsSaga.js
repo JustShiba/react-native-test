@@ -11,11 +11,15 @@ import {
     sendNewCommentSuccess,
 } from './commentsReducer';
 
-export function* sendNewCommentSaga() {
-    const { body, postId } = yield select((state) => state.comments.inputCommentInformation);
+export function* sendNewCommentSaga(args) {
+    const { addCommentText, postId } = args.payload;
 
     try {
-        const response = yield call(apiCall, [`post`, `posts/${postId}/comments`, { body: body }]);
+        const response = yield call(apiCall, [
+            `post`,
+            `posts/${postId}/comments`,
+            { body: addCommentText },
+        ]);
         if (response.status === 200) {
             yield put(sendNewCommentSuccess());
         }
@@ -26,12 +30,15 @@ export function* sendNewCommentSaga() {
     }
 }
 
-export function* changeCommentSaga() {
-    const { body, postId, commentId } = yield select(
-        (state) => state.comments.inputCommentInformation,
-    );
+export function* changeCommentSaga(args) {
+    const { changeComment, postId, commentId } = args.payload;
+
     try {
-        const response = yield call(apiCall, [`put`, `posts/${postId}/comments/${commentId}`, { body: body }]);
+        const response = yield call(apiCall, [
+            `put`,
+            `posts/${postId}/comments/${commentId}`,
+            { body: changeComment },
+        ]);
         if (response.status === 200) {
             yield put(changeCommentSuccess());
         }
@@ -42,8 +49,9 @@ export function* changeCommentSaga() {
     }
 }
 
-export function* deleteCommentSaga() {
-    const { postId, commentId } = yield select((state) => state.comments.inputCommentInformation);
+export function* deleteCommentSaga(args) {
+    const { postId, commentId } = args.payload;
+
     try {
         const response = yield call(apiCall, [`delete`, `posts/${postId}/comments/${commentId}`]);
         if (response.status === 200) {

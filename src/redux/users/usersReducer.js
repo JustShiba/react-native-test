@@ -3,34 +3,22 @@ import { createSlice } from '@reduxjs/toolkit';
 export const usersReducer = createSlice({
     name: 'usersReducer',
     initialState: {
-        userInputInformation: {
-            nickname: '',
-            phone: ''
-        },
         currentUserInformation: {},
         allUsers: [],
-        selectedUserId: '',
         loadingUsers: false,
-        errorUsers: {
-            errorUsersText: '',
-            isErrorUsers: false,
-        },
+        errorUsers: '',
     },
     reducers: {
-        getUserStart: (state, action) => {
+        getUserStart: (state) => {
             state.loadingUsers = true;
-            state.selectedUserId = action.payload;
         },
         getUserSuccess: (state, action) => {
             state.loadingUsers = false;
-            state.selectedUserId = '';
             state.currentUserInformation = action.payload;
         },
         getUserFailure: (state, action) => {
             state.loadingUsers = false;
-            state.selectedUserId = '';
-            state.errorUsers.isErrorUsers = true;
-            state.errorUsers.errorUsersText = action.payload;
+            state.errorUsers = action.payload;
         },
         getAllUsersStart: (state) => {
             state.loadingUsers = true;
@@ -41,46 +29,30 @@ export const usersReducer = createSlice({
         },
         getAllUsersFailure: (state, action) => {
             state.loadingUsers = false;
-            state.errorUsers.isErrorUsers = true;
-            state.errorUsers.errorUsersText = action.payload;
+            state.errorUsers = action.payload;
         },
         deleteUserStart: (state) => {
             state.loadingUsers = true;
-            state.selectedUserId = action.payload;
         },
         deleteUserSuccess: (state) => {
             state.loadingUsers = false;
-            state.selectedUserId = '';
         },
         deleteUserFailure: (state, action) => {
             state.loadingUsers = false;
-            state.selectedUserId = '';
-            state.errorUsers.isErrorUsers = true;
-            state.errorUsers.errorUsersText = action.payload;
+            state.errorUsers = action.payload;
         },
         changeUserDataStart: (state, action) => {
             state.loadingUsers = true;
-            state.userInputInformation.nickname = action.payload.newNickname;
-            state.userInputInformation.phone = action.payload.newPhone;
-            state.selectedUserId = action.payload.currentUserId;
         },
         changeUserDataSuccess: (state) => {
             state.loadingUsers = false;
-            state.userInputInformation.nickname = '';
-            state.userInputInformation.phone = '';
-            state.selectedUserId = '';
         },
         changeUserDataFailure: (state, action) => {
             state.loadingUsers = false;
-            state.userInputInformation.nickname = '';
-            state.userInputInformation.phone = '';
-            state.selectedUserId = '';
-            state.errorUsers.isErrorUsers = true;
-            state.errorUsers.errorUsersText = action.payload;
+            state.errorUsers = action.payload;
         },
         removeError: (state) => {
-            state.errorUsers.isErrorUsers = false;
-            state.errorUsers.errorUsersText = '';
+            state.errorUsers = '';
         },
     },
 });

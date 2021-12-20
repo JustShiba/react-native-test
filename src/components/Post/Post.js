@@ -24,7 +24,9 @@ export const Post = ({ postInformation, userName, setNeedRefresh }) => {
 
     useEffect(async () => {
         const currentUserId = await localStore('get', USER__ID);
-        if (currentUserId === userId) { setIsUserPost(true) };
+        if (currentUserId === userId) {
+            setIsUserPost(true);
+        }
     }, []);
 
     return (
@@ -36,13 +38,13 @@ export const Post = ({ postInformation, userName, setNeedRefresh }) => {
                             {userName
                                 ? userName.substring(0, 2).toUpperCase()
                                 : nickname
-                                    ? nickname.substring(0, 2).toUpperCase()
-                                    : 'HI'}
+                                ? nickname.substring(0, 2).toUpperCase()
+                                : 'HI'}
                         </Text>
                     </View>
                     <Text style={styles.userInformation}>{userName || nickname || 'No name'}</Text>
                 </View>
-                {isChangeCurrentPost ?
+                {isChangeCurrentPost ? (
                     <View>
                         <TextInput
                             style={[styles.postTitle, styles.inputs]}
@@ -57,35 +59,39 @@ export const Post = ({ postInformation, userName, setNeedRefresh }) => {
                             multiline={true}
                             onChangeText={(text) => setNewPostBody(text)}
                         />
-                    </View> :
+                    </View>
+                ) : (
                     <View>
                         <Text style={styles.postTitle}>{title}</Text>
                         <Text style={styles.postBody}>{body}</Text>
                     </View>
-                }
-
+                )}
             </View>
             <Image
                 style={styles.postBackground}
                 source={require('../../../assets/images/PostBG.png')}
             />
-            {isUserPost ? isChangeCurrentPost ?
-                <TouchableOpacity
-                    style={styles.EditPostIcon}
-                    onPress={() => {
-                        setIsChangeCurrentPost(false);
-                        dispatch(changePostStart({ newPostTitle, newPostBody, postId }));
-                        setNeedRefresh(true);
-                    }}
-                >
-                    <ArrowSend />
-                </TouchableOpacity> :
-                <TouchableOpacity
-                    style={styles.EditPostIcon}
-                    onPress={() => setModalPostSettingsVisible(!modalPostSettingsVisible)}
-                >
-                    <EditIcon />
-                </TouchableOpacity> : null}
+            {isUserPost ? (
+                isChangeCurrentPost ? (
+                    <TouchableOpacity
+                        style={styles.EditPostIcon}
+                        onPress={() => {
+                            setIsChangeCurrentPost(false);
+                            dispatch(changePostStart({ newPostTitle, newPostBody, postId }));
+                            setNeedRefresh(true);
+                        }}
+                    >
+                        <ArrowSend />
+                    </TouchableOpacity>
+                ) : (
+                    <TouchableOpacity
+                        style={styles.EditPostIcon}
+                        onPress={() => setModalPostSettingsVisible(!modalPostSettingsVisible)}
+                    >
+                        <EditIcon />
+                    </TouchableOpacity>
+                )
+            ) : null}
 
             <TouchableOpacity
                 style={styles.postCommentsIcon}
@@ -93,26 +99,24 @@ export const Post = ({ postInformation, userName, setNeedRefresh }) => {
             >
                 <CommentsIcon />
             </TouchableOpacity>
-            {modalVisible ?
+            {modalVisible ? (
                 <ModalComments
                     modalVisible={modalVisible}
                     setModalVisible={setModalVisible}
                     commentsInformation={comments}
                     postId={postId}
                     userNickname={userName || nickname || 'No name'}
-                /> :
-                null
-            }
-            {modalPostSettingsVisible ?
+                />
+            ) : null}
+            {modalPostSettingsVisible ? (
                 <ModalSettingsPost
                     modalPostSettingsVisible={modalPostSettingsVisible}
                     setModalPostSettingsVisible={setModalPostSettingsVisible}
                     setIsChangeCurrentPost={setIsChangeCurrentPost}
                     postId={postId}
                     setNeedRefresh={setNeedRefresh}
-                /> :
-                null
-            }
+                />
+            ) : null}
         </View>
     );
 };

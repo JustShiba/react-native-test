@@ -5,21 +5,17 @@ import { useSelector } from 'react-redux';
 import { styles } from './ModalErrorStyle';
 
 export const ModalError = () => {
-    const { isErrorUsers, errorUsersText } = useSelector((state) => state.users.errorUsers);
-    const { isErrorPosts, errorPostsText } = useSelector((state) => state.posts.errorPosts);
-    const { isErrorAuthorization, errorAuthorizationText } = useSelector(
-        (state) => state.authorization.errorAuthorization,
-    );
-    const { isErrorComments, errorCommentsText } = useSelector(
-        (state) => state.comments.errorComments,
-    );
+    const { errorUsers } = useSelector((state) => state.users);
+    const { errorPosts } = useSelector((state) => state.posts);
+    const { errorAuthorization } = useSelector((state) => state.authorization);
+    const { errorComments } = useSelector((state) => state.comments);
 
     return (
         <View style={styles.centeredView}>
-            {isErrorUsers || isErrorPosts || isErrorAuthorization || isErrorComments ? (
+            {errorUsers || errorPosts || errorAuthorization || errorComments ? (
                 <View style={styles.modalView}>
                     <Text style={styles.errorText}>
-                        {errorUsersText || errorPostsText || errorAuthorizationText || errorCommentsText}
+                        {errorUsers || errorPosts || errorAuthorization || errorComments}
                     </Text>
                 </View>
             ) : null}

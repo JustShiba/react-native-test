@@ -8,24 +8,29 @@ import { ArrowBackIcon } from '../../../assets/componentIcons/arrowBack/ArrowBac
 import { signupStart } from '../../redux/authorization/authorizationReducer';
 
 export const SignupPage = ({ navigation }) => {
-    const { userAuthorizationInformation } = useSelector(state => state.authorization.inputUserInformation)
+    const { userAuthorizationInformation } = useSelector(
+        (state) => state.authorization.inputUserInformation,
+    );
     const [userEmail, setuserEmail] = useState(userAuthorizationInformation.email);
     const [userPassword, setuserPassword] = useState(userAuthorizationInformation.password);
-    const { loadingAuthorization } = useSelector(state => state.authorization);
+    const { loadingAuthorization } = useSelector((state) => state.authorization);
     const dispatch = useDispatch();
 
     return (
         <View>
-
-            {loadingAuthorization ?
-                <ActivityIndicator size="large" color="#FAB15F" /> :
+            {loadingAuthorization ? (
+                <ActivityIndicator size="large" color="#FAB15F" />
+            ) : (
                 <View>
                     <Image
                         style={styles.orangeLine}
                         source={require('../../../assets/images/OrangeLine.png')}
                         resizeMethod="auto"
                     />
-                    <TouchableOpacity style={styles.arrowBack} onPress={() => navigation.navigate('Login')}>
+                    <TouchableOpacity
+                        style={styles.arrowBack}
+                        onPress={() => navigation.navigate('Login')}
+                    >
                         <ArrowBackIcon />
                     </TouchableOpacity>
                     <Text style={styles.title}>First time? </Text>
@@ -73,7 +78,8 @@ export const SignupPage = ({ navigation }) => {
                     <View style={styles.boxTitleAuthorization}>
                         <Text style={styles.titleAuthorization}>sing up</Text>
                     </View>
-                </View>}
+                </View>
+            )}
         </View>
     );
 };

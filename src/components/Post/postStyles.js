@@ -94,5 +94,5 @@ export const styles = StyleSheet.create({
     },
     bodyInput: {
         height: 70,
-    }
+    },
 });

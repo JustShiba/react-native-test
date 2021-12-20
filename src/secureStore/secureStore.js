@@ -5,7 +5,7 @@ export async function localStore(method, key, value) {
         case 'save':
             return await SecureStore.setItemAsync(key, value);
         case 'get':
-            return await SecureStore.getItemAsync(key) || null;
+            return (await SecureStore.getItemAsync(key)) || null;
         case 'remove':
             return await SecureStore.deleteItemAsync(key);
     }

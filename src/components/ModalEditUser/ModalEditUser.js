@@ -18,7 +18,7 @@ export const ModalEditUser = ({ modalEditUserVisible, setModalEditUserVisible })
     const [newNickname, setNewNickname] = useState('');
     const [newPhone, setNewPhone] = useState('');
     const [currentUserId, setCurrentUserId] = useState('');
-    const { loadingUsers } = useSelector(state => state.users);
+    const { loadingUsers } = useSelector((state) => state.users);
     const dispatch = useDispatch();
 
     useEffect(async () => {
@@ -42,21 +42,24 @@ export const ModalEditUser = ({ modalEditUserVisible, setModalEditUserVisible })
                             style={styles.saveData}
                             onPress={() => {
                                 setModalEditUserVisible(!modalEditUserVisible);
-                                dispatch(changeUserDataStart({ newNickname, newPhone, currentUserId }));
+                                dispatch(
+                                    changeUserDataStart({ newNickname, newPhone, currentUserId }),
+                                );
                                 navigation.navigate('Profile');
                             }}
                         >
                             <ConfirmIcon />
                         </TouchableOpacity>
                     </SafeAreaView>
-                    {loadingUsers ?
-                        <ActivityIndicator size="large" color="#FAB15F" /> :
+                    {loadingUsers ? (
+                        <ActivityIndicator size="large" color="#FAB15F" />
+                    ) : (
                         <View>
                             <View style={styles.editInputBox}>
                                 <View style={styles.editInputs}>
                                     <Text style={styles.inputTitle}>Nickname</Text>
                                     <TextInput
-                                        placeholder='Type here...'
+                                        placeholder="Type here..."
                                         autoCorrect={false}
                                         autoCapitalize="none"
                                         defaultValue={newNickname}
@@ -66,7 +69,7 @@ export const ModalEditUser = ({ modalEditUserVisible, setModalEditUserVisible })
                                 <View style={[styles.editInputs, styles.lastInput]}>
                                     <Text style={styles.inputTitle}>Phone</Text>
                                     <TextInput
-                                        placeholder='Type here...'
+                                        placeholder="Type here..."
                                         autoCorrect={false}
                                         autoCapitalize="none"
                                         defaultValue={newPhone}
@@ -91,10 +94,10 @@ export const ModalEditUser = ({ modalEditUserVisible, setModalEditUserVisible })
                                 </View>
                             </TouchableOpacity>
                         </View>
-                    }
+                    )}
                 </View>
                 <ModalError />
-            </Modal >
-        </View >
+            </Modal>
+        </View>
     );
 };

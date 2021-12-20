@@ -49,7 +49,7 @@ export const styles = StyleSheet.create({
             width: 0,
             height: 5,
         },
-        shadowOpacity: 0.10,
+        shadowOpacity: 0.1,
         shadowRadius: 10,
         elevation: 10,
     },
@@ -81,7 +81,7 @@ export const styles = StyleSheet.create({
             width: 0,
             height: 5,
         },
-        shadowOpacity: 0.10,
+        shadowOpacity: 0.1,
         shadowRadius: 10,
         elevation: 4,
     },
@@ -94,5 +94,5 @@ export const styles = StyleSheet.create({
         fontFamily: 'Overlock_Bold',
         color: '#000000',
         fontSize: 18,
-    }
+    },
 });
