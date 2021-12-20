@@ -1,4 +1,4 @@
-import { call, delay, put, select } from 'redux-saga/effects';
+import { call, delay, put } from 'redux-saga/effects';
 
 import { apiCall } from '../../services/service';
 import {
