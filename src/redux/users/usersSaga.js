@@ -1,6 +1,7 @@
-import { select, call, put, delay } from 'redux-saga/effects';
+import { call, put, delay } from 'redux-saga/effects';
 
 import { apiCall } from '../../services/service';
+import { logout } from '../authorization/authorizationReducer';
 import {
     getUserSuccess,
     getUserFailure,
@@ -42,12 +43,12 @@ export function* getAllUsersSaga() {
 }
 
 export function* deleteUserSaga(args) {
-    const { selectedUserId } = yield select((state) => state.users);
     try {
         const response = yield call(apiCall, [`delete`, `users/${args.payload}`]);
 
         if (response.status === 200) {
             yield put(deleteUserSuccess());
+            yield put(logout());
         }
     } catch (error) {
         yield put(deleteUserFailure(error.message));
@@ -67,7 +68,7 @@ export function* changeUserDataSaga(args) {
 
         if (response.status === 200) {
             console.log(response);
-            yield put(changeUserDataSuccess());
+            yield put(changeUserDataSuccess(response.data));
         }
     } catch (error) {
         yield put(changeUserDataFailure(error.message));

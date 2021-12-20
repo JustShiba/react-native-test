@@ -41,11 +41,12 @@ export const usersReducer = createSlice({
             state.loadingUsers = false;
             state.errorUsers = action.payload;
         },
-        changeUserDataStart: (state, action) => {
+        changeUserDataStart: (state) => {
             state.loadingUsers = true;
         },
-        changeUserDataSuccess: (state) => {
+        changeUserDataSuccess: (state, action) => {
             state.loadingUsers = false;
+            state.currentUserInformation = action.payload;
         },
         changeUserDataFailure: (state, action) => {
             state.loadingUsers = false;
