@@ -95,8 +95,8 @@ export const ModalEditUser = ({ modalEditUserVisible, setModalEditUserVisible })
                             </TouchableOpacity>
                         </View>
                     )}
+                    <ModalError />
                 </View>
-                <ModalError />
             </Modal>
         </View>
     );

@@ -4,7 +4,7 @@ export const styles = StyleSheet.create({
     centeredView: {
         flex: 1,
         justifyContent: 'flex-end',
-        bottom: 70,
+        bottom: 100,
         alignItems: 'flex-end',
     },
     modalView: {

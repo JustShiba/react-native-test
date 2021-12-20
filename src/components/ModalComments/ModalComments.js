@@ -58,6 +58,7 @@ export const ModalComments = ({
                             keyExtractor={(comment) => comment.commentId}
                         />
                     )}
+                    <ModalError />
                     <SafeAreaView style={styles.addCommentBox}>
                         <View style={styles.userIcon}>
                             <Text style={styles.userIconText}>{userNickname.substring(0, 2)}</Text>
@@ -80,7 +81,6 @@ export const ModalComments = ({
                         </TouchableOpacity>
                     </SafeAreaView>
                 </View>
-                <ModalError />
             </Modal>
         </View>
     );
