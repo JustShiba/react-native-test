@@ -12,7 +12,7 @@ import { ModalSettingsPost } from '../ModalSettingsPost/ModalSettingsPost';
 import { ArrowSend } from '../../../assets/componentIcons/arrowSend/ArrowSend';
 import { changePostStart } from '../../redux/posts/postsReducer';
 
-export const Post = ({ postInformation, userName, setNeedRefresh }) => {
+export const Post = ({ postInformation, userName }) => {
     const { body, title, comments, nickname, postId, userId } = postInformation.item;
     const [modalVisible, setModalVisible] = useState(false);
     const [modalPostSettingsVisible, setModalPostSettingsVisible] = useState(false);
@@ -78,7 +78,6 @@ export const Post = ({ postInformation, userName, setNeedRefresh }) => {
                         onPress={() => {
                             setIsChangeCurrentPost(false);
                             dispatch(changePostStart({ newPostTitle, newPostBody, postId }));
-                            setNeedRefresh(true);
                         }}
                     >
                         <ArrowSend />

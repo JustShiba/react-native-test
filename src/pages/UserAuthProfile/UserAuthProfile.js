@@ -14,14 +14,7 @@ export const UserAuthProfile = ({ route, navigation }) => {
     const { email, nickname, phone, posts } = useSelector(
         (state) => state.users.currentUserInformation,
     );
-    const [needRefresh, setNeedRefresh] = useState(false);
     const dispatch = useDispatch();
-
-    useEffect(async () => {
-        const userId = userIdProp || (await localStore('get', USER__ID));
-        dispatch(getUserStart(userId));
-        setNeedRefresh(false);
-    }, [needRefresh]);
 
     useEffect(async () => {
         const userId = await localStore('get', USER__ID);
@@ -29,15 +22,12 @@ export const UserAuthProfile = ({ route, navigation }) => {
             dispatch(getUserStart(userId));
         });
         return unsubscribe;
-    }, [navigation]);
+    }, []);
 
     useEffect(async () => {
         const userId = userIdProp || (await localStore('get', USER__ID));
-        const unsubscribe = navigation.addListener('focus', () => {
-            dispatch(getUserStart(userId));
-        });
-        return unsubscribe;
-    }, [dispatch, userIdProp, navigation]);
+        dispatch(getUserStart(userId));
+    }, [userIdProp]);
 
     return (
         <View>
@@ -49,13 +39,7 @@ export const UserAuthProfile = ({ route, navigation }) => {
                     <FlatList
                         style={styles.list}
                         data={posts}
-                        renderItem={(post) => (
-                            <Post
-                                postInformation={post}
-                                userName={nickname}
-                                setNeedRefresh={setNeedRefresh}
-                            />
-                        )}
+                        renderItem={(post) => <Post postInformation={post} userName={nickname} />}
                         keyExtractor={(item) => item.postId}
                     />
                 </View>
