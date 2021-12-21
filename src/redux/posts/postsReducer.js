@@ -67,6 +67,11 @@ export const postsReducer = createSlice({
                 action.payload.comment,
             ];
         },
+        postChangeCommentStart: () => {},
+        postChangeCommentFinish: (state, action) => {
+            const { comment, postIndex, commentIndex } = action.payload;
+            state.allPosts[postIndex].comments[commentIndex] = comment;
+        },
     },
 });
 
@@ -88,4 +93,6 @@ export const {
     updateAllPostsFinish,
     postAddCommentStart,
     postAddCommentFinish,
+    postChangeCommentStart,
+    postChangeCommentFinish,
 } = postsReducer.actions;

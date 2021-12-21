@@ -54,6 +54,7 @@ export const ModalComments = ({
                                     userComment={comment.item.userId}
                                     postId={postId}
                                     commentId={comment.item.commentId}
+                                    path={path}
                                 />
                             )}
                             keyExtractor={(comment) => comment.commentId}

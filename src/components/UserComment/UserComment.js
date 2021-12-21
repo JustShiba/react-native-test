@@ -9,7 +9,7 @@ import { USER__ID } from '../../redux/constances/constances';
 import { localStore } from '../../secureStore/secureStore';
 import { ModalSettingsComment } from '../ModalSettingsComment/ModalSettingsComment';
 
-export const UserComment = ({ textComment, userComment, postId, commentId }) => {
+export const UserComment = ({ textComment, userComment, postId, commentId, path }) => {
     const [isUserComment, setIsUserComment] = useState(false);
     const [modalCommentSettings, setModalCommentSettings] = useState(false);
     const [isChangeCurrentComment, setIsChangeCurrentComment] = useState(false);
@@ -49,7 +49,9 @@ export const UserComment = ({ textComment, userComment, postId, commentId }) => 
                     <TouchableOpacity
                         onPress={() => {
                             setIsChangeCurrentComment(false);
-                            dispatch(changeCommentStart({ changeComment, postId, commentId }));
+                            dispatch(
+                                changeCommentStart({ changeComment, postId, commentId, path }),
+                            );
                         }}
                     >
                         <ArrowSend />

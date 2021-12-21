@@ -1,8 +1,8 @@
 import { call, delay, put, take } from 'redux-saga/effects';
 
 import { apiCall } from '../../services/service';
-import { postAddCommentStart } from '../posts/postsReducer';
-import { userAddCommentStart } from '../users/usersReducer';
+import { postAddCommentStart, postChangeCommentStart } from '../posts/postsReducer';
+import { userAddCommentStart, userChangeCommentStart } from '../users/usersReducer';
 import {
     changeCommentFailure,
     changeCommentSuccess,
@@ -36,7 +36,7 @@ export function* sendNewCommentSaga(args) {
 }
 
 export function* changeCommentSaga(args) {
-    const { changeComment, postId, commentId } = args.payload;
+    const { changeComment, postId, commentId, path } = args.payload;
 
     try {
         const response = yield call(apiCall, [
@@ -46,6 +46,9 @@ export function* changeCommentSaga(args) {
         ]);
         if (response.status === 200) {
             yield put(changeCommentSuccess());
+            if (path === 'user')
+                yield put(userChangeCommentStart({ data: response.data, postId, commentId }));
+            else yield put(postChangeCommentStart({ data: response.data, postId, commentId }));
         }
     } catch (error) {
         yield put(changeCommentFailure(error.message));

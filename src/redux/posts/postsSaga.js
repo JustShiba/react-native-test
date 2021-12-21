@@ -15,6 +15,7 @@ import {
     updateAllPostsFinish,
     getAllPostsStart,
     postAddCommentFinish,
+    postChangeCommentFinish,
 } from './postsReducer';
 import { addNamesToPosts } from './addNamesToPosts';
 import { getUserStart, updateUserPostStart } from '../users/usersReducer';
@@ -112,5 +113,20 @@ export function* addPostsCommentSaga(args) {
     const { postId, comment } = args.payload;
     for (let i = 0; i < posts.length; i++) {
         if (posts[i].postId === postId) yield put(postAddCommentFinish({ index: i, comment }));
+    }
+}
+
+export function* changePostsCommentSaga(args) {
+    const posts = yield select((state) => state.posts.allPosts);
+    const { data, postId, commentId } = args.payload;
+    for (let i = 0; i < posts.length; i++) {
+        if (posts[i].postId === postId) {
+            for (let b = 0; b < posts[i].comments.length; b++) {
+                if (posts[i].comments[b].commentId === commentId)
+                    yield put(
+                        postChangeCommentFinish({ comment: data, postIndex: i, commentIndex: b }),
+                    );
+            }
+        }
     }
 }
