@@ -52,11 +52,8 @@ export const postsReducer = createSlice({
         removeError: (state) => {
             state.errorPosts = '';
         },
-        updateAllPostsStart: (state) => {
-            state.loadingPosts = true;
-        },
+        updateAllPostsStart: () => {},
         updateAllPostsFinish: (state, action) => {
-            state.loadingPosts = false;
             const { index, post } = action.payload;
             state.allPosts[index] = post;
         },
@@ -71,6 +68,18 @@ export const postsReducer = createSlice({
         postChangeCommentFinish: (state, action) => {
             const { comment, postIndex, commentIndex } = action.payload;
             state.allPosts[postIndex].comments[commentIndex] = comment;
+        },
+        postDeleteCommentStart: () => {},
+        postDeleteCommentFinish: (state, action) => {
+            const { postIndex, commentIndex } = action.payload;
+            const { allPosts } = state;
+            allPosts[postIndex].comments = [
+                ...allPosts[postIndex].comments.splice(0, commentIndex),
+                ...allPosts[postIndex].comments.splice(
+                    commentIndex,
+                    allPosts[postIndex].comments.length,
+                ),
+            ];
         },
     },
 });
@@ -95,4 +104,6 @@ export const {
     postAddCommentFinish,
     postChangeCommentStart,
     postChangeCommentFinish,
+    postDeleteCommentStart,
+    postDeleteCommentFinish,
 } = postsReducer.actions;

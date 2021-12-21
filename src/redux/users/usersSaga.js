@@ -15,6 +15,7 @@ import {
     updateUserPostFinish,
     userAddCommentFinish,
     userChangeCommentFinish,
+    userDeleteCommentFinish,
 } from './usersReducer';
 
 export function* getUserSaga(args) {
@@ -105,6 +106,19 @@ export function* changeUserCommentSaga(args) {
                     yield put(
                         userChangeCommentFinish({ comment: data, postIndex: i, commentIndex: b }),
                     );
+            }
+        }
+    }
+}
+
+export function* deleteUserCommentSaga(args) {
+    const { posts } = yield select((state) => state.users.currentUserInformation);
+    const { postId, commentId } = args.payload;
+    for (let i = 0; i < posts.length; i++) {
+        if (posts[i].postId === postId) {
+            for (let b = 0; b < posts[i].comments.length; b++) {
+                if (posts[i].comments[b].commentId === commentId)
+                    yield put(userDeleteCommentFinish({ postIndex: i, commentIndex: b }));
             }
         }
     }

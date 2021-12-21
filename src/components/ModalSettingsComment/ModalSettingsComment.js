@@ -11,6 +11,7 @@ export const ModalSettingsComment = ({
     setIsChangeCurrentComment,
     postId,
     commentId,
+    path,
 }) => {
     const dispatch = useDispatch();
 
@@ -32,7 +33,7 @@ export const ModalSettingsComment = ({
                             style={styles.setting}
                             onPress={() => {
                                 setModalCommentSettings(false);
-                                dispatch(deleteCommentStart({ postId, commentId }));
+                                dispatch(deleteCommentStart({ postId, commentId, path }));
                             }}
                         >
                             <Text style={[styles.settingDelete, styles.settingText]}>

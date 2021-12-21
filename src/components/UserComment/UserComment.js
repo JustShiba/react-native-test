@@ -43,6 +43,7 @@ export const UserComment = ({ textComment, userComment, postId, commentId, path 
                 setIsChangeCurrentComment={setIsChangeCurrentComment}
                 postId={postId}
                 commentId={commentId}
+                path={path}
             />
             {isUserComment ? (
                 isChangeCurrentComment ? (

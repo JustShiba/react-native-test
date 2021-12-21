@@ -55,11 +55,8 @@ export const usersReducer = createSlice({
         removeError: (state) => {
             state.errorUsers = '';
         },
-        updateUserPostStart: (state) => {
-            state.loadingPosts = true;
-        },
+        updateUserPostStart: () => {},
         updateUserPostFinish: (state, action) => {
-            state.loadingPosts = false;
             const { index, post } = action.payload;
             state.currentUserInformation.posts[index] = post;
         },
@@ -74,6 +71,15 @@ export const usersReducer = createSlice({
         userChangeCommentFinish: (state, action) => {
             const { comment, postIndex, commentIndex } = action.payload;
             state.currentUserInformation.posts[postIndex].comments[commentIndex] = comment;
+        },
+        userDeleteCommentStart: () => {},
+        userDeleteCommentFinish: (state, action) => {
+            const { postIndex, commentIndex } = action.payload;
+            const { posts } = state.currentUserInformation;
+            posts[postIndex].comments = [
+                ...posts[postIndex].comments.splice(0, commentIndex),
+                ...posts[postIndex].comments.splice(commentIndex, posts[postIndex].comments.length),
+            ];
         },
     },
 });
@@ -98,4 +104,6 @@ export const {
     userAddCommentFinish,
     userChangeCommentStart,
     userChangeCommentFinish,
+    userDeleteCommentStart,
+    userDeleteCommentFinish,
 } = usersReducer.actions;
