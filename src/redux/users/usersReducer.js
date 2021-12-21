@@ -76,10 +76,11 @@ export const usersReducer = createSlice({
         userDeleteCommentFinish: (state, action) => {
             const { postIndex, commentIndex } = action.payload;
             const { posts } = state.currentUserInformation;
-            posts[postIndex].comments = [
-                ...posts[postIndex].comments.splice(0, commentIndex),
-                ...posts[postIndex].comments.splice(commentIndex, posts[postIndex].comments.length),
-            ];
+            if (posts[postIndex].comments.length === 1) {
+                posts[postIndex].comments = [];
+                return;
+            }
+            posts[postIndex].comments.splice(commentIndex, 1);
         },
     },
 });

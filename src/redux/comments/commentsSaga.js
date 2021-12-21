@@ -69,8 +69,8 @@ export function* deleteCommentSaga(args) {
     const { postId, commentId, path } = args.payload;
 
     try {
-        // const response = yield call(apiCall, [`delete`, `posts/${postId}/comments/${commentId}`]);
-        if (true) {
+        const response = yield call(apiCall, [`delete`, `posts/${postId}/comments/${commentId}`]);
+        if (response.status === 200) {
             yield put(deleteCommentSuccess());
             if (path === 'user') yield put(userDeleteCommentStart({ postId, commentId }));
             else yield put(postDeleteCommentStart({ postId, commentId }));

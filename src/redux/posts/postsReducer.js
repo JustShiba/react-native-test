@@ -72,14 +72,11 @@ export const postsReducer = createSlice({
         postDeleteCommentStart: () => {},
         postDeleteCommentFinish: (state, action) => {
             const { postIndex, commentIndex } = action.payload;
-            const { allPosts } = state;
-            allPosts[postIndex].comments = [
-                ...allPosts[postIndex].comments.splice(0, commentIndex),
-                ...allPosts[postIndex].comments.splice(
-                    commentIndex,
-                    allPosts[postIndex].comments.length,
-                ),
-            ];
+            if (state.allPosts[postIndex].comments.length === 1) {
+                state.allPosts[postIndex].comments = [];
+                return;
+            }
+            state.allPosts[postIndex].comments.splice(commentIndex, 1);
         },
     },
 });

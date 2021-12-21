@@ -44,6 +44,8 @@ export const AddPostPage = () => {
                         style={styles.arrowSendPost}
                         onPress={() => {
                             dispatch(sendNewPostStart({ postTitleAddPost, postBodyAddPost }));
+                            setPostTitleAddPost('');
+                            setPostBodyAddPost('');
                         }}
                     >
                         <ArrowSend />
