@@ -10,7 +10,7 @@ import { localStore } from '../../secureStore/secureStore';
 import { ModalSettingsComment } from '../ModalSettingsComment/ModalSettingsComment';
 
 export const UserComment = ({ textComment, userComment, postId, commentId, path }) => {
-    const [isUserComment, setIsUserComment] = useState(false);
+    const [isUserComment, setIsUserComment] = useState(true);
     const [modalCommentSettings, setModalCommentSettings] = useState(false);
     const [isChangeCurrentComment, setIsChangeCurrentComment] = useState(false);
     const [changeComment, setChangeComment] = useState(textComment);
@@ -21,6 +21,7 @@ export const UserComment = ({ textComment, userComment, postId, commentId, path 
         if (currentUserId === userComment) {
             setIsUserComment(true);
         }
+        return () => setIsUserComment(false);
     }, []);
 
     return (

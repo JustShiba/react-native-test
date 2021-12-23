@@ -32,7 +32,6 @@ export const ModalSettingsComment = ({
                         <TouchableOpacity
                             style={styles.setting}
                             onPress={() => {
-                                setModalCommentSettings(false);
                                 dispatch(deleteCommentStart({ postId, commentId, path }));
                             }}
                         >
