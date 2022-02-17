@@ -8,11 +8,11 @@ import { ArrowBackIcon } from '../../../assets/componentIcons/arrowBack/ArrowBac
 import { signupStart } from '../../redux/authorization/authorizationReducer';
 
 export const SignupPage = ({ navigation }) => {
-    const { userAuthorizationInformation } = useSelector(
-        (state) => state.authorization.inputUserInformation,
-    );
-    const [userEmail, setuserEmail] = useState(userAuthorizationInformation.email);
-    const [userPassword, setuserPassword] = useState(userAuthorizationInformation.password);
+    // const { userAuthorizationInformation } = useSelector(
+    //     (state) => state.authorization.inputUserInformation,
+    // );
+    const [userEmail, setuserEmail] = useState('');
+    const [userPassword, setuserPassword] = useState('');
     const { loadingAuthorization } = useSelector((state) => state.authorization);
     const dispatch = useDispatch();
 
