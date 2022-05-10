@@ -16,9 +16,8 @@ export const authorizationReducer = createSlice({
         loginStart: (state) => {
             state.loadingAuthorization = true;
         },
-        loginSuccess: (state, action) => {
+        loginSuccess: (state) => {
             state.loadingAuthorization = false;
-            state.userInformation = action.payload;
             state.isAuthorized = true;
         },
         loginFailure: (state, action) => {

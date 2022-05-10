@@ -1,37 +1,30 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
-    orangeLine: {
+    bg: {
         width: '100%',
-        height: 250,
+        height: '60%',
+    },
+    bg2: {
+        width: '100%',
+        height: '35%',
     },
     title: {
-        backgroundColor: 'rgba(255, 255, 255, 0)',
-        marginLeft: 'auto',
+        backgroundColor: 'transparent',
+        marginLeft: 0,
         marginRight: 'auto',
-        marginTop: -30,
-        textTransform: 'uppercase',
-        fontSize: 22,
-        fontFamily: 'RobotoSlab_Bold',
-        fontWeight: '800',
-        color: '#2A4D60',
+        marginTop: 30,
+        fontSize: 30,
+        fontFamily: 'RobotoSlab_Regular',
+        fontWeight: '700',
+        color: 'black',
     },
     inputsBox: {
-        marginTop: 40,
-        height: 120,
-        width: '75%',
+        alignSelf: 'center',
+        marginTop: 10,
+        width: '100%',
         backgroundColor: '#FFFFFF',
-        borderTopRightRadius: 100,
-        borderBottomRightRadius: 100,
         position: 'relative',
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 2,
-            height: 7,
-        },
-        shadowOpacity: 0.09,
-        shadowRadius: 7,
-        elevation: 8,
     },
     inputs: {
         height: 60,
@@ -40,17 +33,18 @@ export const styles = StyleSheet.create({
         fontSize: 18,
         paddingHorizontal: 15,
         color: '#00000080',
-    },
-    emailInput: {
-        borderBottomColor: '#ECECEC',
+        borderBottomColor: 'black',
         borderBottomWidth: 2,
     },
-    submitButtonGradient: {
-        width: 50,
-        height: 50,
-        borderRadius: 25,
+    submitButton: {
+        width: '100%',
+        height: 41,
+        borderRadius: 7,
         alignItems: 'center',
         justifyContent: 'center',
+        alignSelf: 'center',
+        backgroundColor: 'black',
+        marginTop: 25,
     },
     linkToSignup: {
         fontSize: 16,

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Image, Text, TextInput, View, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 
 import { styles } from './loginStyles';
 import { loginStart } from '../../redux/authorization/authorizationReducer';
+import { ArrowBackIcon } from '../../../assets/componentIcons/arrowBack/ArrowBackIcon';
 
 export const LoginPage = ({ navigation }) => {
     const [userEmail, setuserEmail] = useState('');
@@ -17,18 +17,25 @@ export const LoginPage = ({ navigation }) => {
             {loadingAuthorization ? (
                 <ActivityIndicator size="large" color="#FAB15F" />
             ) : (
-                <View>
+                <View style={{ backgroundColor: 'white', height: '100%' }}>
                     <Image
-                        style={styles.orangeLine}
-                        source={require('../../../assets/images/OrangeLine.png')}
-                        resizeMethod="auto"
+                        style={styles.bg}
+                        source={require('../../../assets/images/login_bg.png')}
+                        resizeMethod="scale"
                     />
-                    <Text style={styles.title}>Alredy singed up?</Text>
-                    <View style={styles.inputsBox}>
-                        <View>
+                    <TouchableOpacity
+                        style={{ position: 'absolute', left: 40, top: 50 }}
+                        onPress={() => navigation.navigate('Main')}
+                        activeOpacity="0.8"
+                    >
+                        <ArrowBackIcon />
+                    </TouchableOpacity>
+                    <View style={{ alignSelf: 'center', width: '80%' }}>
+                        <Text style={styles.title}>С возвращением...</Text>
+                        <View style={styles.inputsBox}>
                             <TextInput
-                                style={[styles.inputs, styles.emailInput]}
-                                placeholder="EMAIL"
+                                style={styles.inputs}
+                                placeholder="E-mail"
                                 placeholderTextColor="rgba(0, 0, 0, 0.5)"
                                 autoCorrect={false}
                                 autoComplete="email"
@@ -36,11 +43,9 @@ export const LoginPage = ({ navigation }) => {
                                 defaultValue={userEmail}
                                 onChangeText={(text) => setuserEmail(text)}
                             />
-                        </View>
-                        <View>
                             <TextInput
                                 style={styles.inputs}
-                                placeholder="PASSWORD"
+                                placeholder="Пароль"
                                 placeholderTextColor="rgba(0, 0, 0, 0.5)"
                                 autoCorrect={false}
                                 autoComplete="password"
@@ -49,30 +54,14 @@ export const LoginPage = ({ navigation }) => {
                                 defaultValue={userPassword}
                                 onChangeText={(text) => setUserPassword(text)}
                             />
-                        </View>
-                        <TouchableOpacity
-                            style={{ position: 'absolute', right: -15, top: '28%' }}
-                            onPress={() => dispatch(loginStart({ userEmail, userPassword }))}
-                            activeOpacity="0.8"
-                        >
-                            <LinearGradient
-                                colors={['#FAAE5F', '#F86F5C']}
-                                style={styles.submitButtonGradient}
-                                start={{ x: 0.1, y: 0.2 }}
-                                locations={[0.1, 0.8]}
+                            <TouchableOpacity
+                                style={styles.submitButton}
+                                onPress={() => dispatch(loginStart())}
+                                activeOpacity="0.8"
                             >
-                                <Image source={require('../../../assets/images/Arrow.png')} />
-                            </LinearGradient>
-                        </TouchableOpacity>
-                    </View>
-                    <TouchableOpacity
-                        style={styles.buttonToSignup}
-                        onPress={() => navigation.navigate('Signup')}
-                    >
-                        <Text style={styles.linkToSignup}>Sign Up</Text>
-                    </TouchableOpacity>
-                    <View style={styles.boxTitleAuthorization}>
-                        <Text style={styles.titleAuthorization}>Log in</Text>
+                                <Text style={{ color: 'white', fontSize: 24 }}>Войти</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
             )}

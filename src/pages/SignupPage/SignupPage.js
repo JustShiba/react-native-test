@@ -1,44 +1,42 @@
-import React, { useState } from 'react';
-import { Image, Text, TextInput, View, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-import { useDispatch, useSelector } from 'react-redux';
-
 import { styles } from '../LoginPage/loginStyles';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Image, Text, TextInput, View, TouchableOpacity, ActivityIndicator } from 'react-native';
+
+import { loginStart } from '../../redux/authorization/authorizationReducer';
 import { ArrowBackIcon } from '../../../assets/componentIcons/arrowBack/ArrowBackIcon';
-import { signupStart } from '../../redux/authorization/authorizationReducer';
 
 export const SignupPage = ({ navigation }) => {
-    // const { userAuthorizationInformation } = useSelector(
-    //     (state) => state.authorization.inputUserInformation,
-    // );
     const [userEmail, setuserEmail] = useState('');
-    const [userPassword, setuserPassword] = useState('');
+    const [userNickname, setUserNickname] = useState('');
+    const [userPhone, setUserPhone] = useState('');
+    const [userPassword, setUserPassword] = useState('');
     const { loadingAuthorization } = useSelector((state) => state.authorization);
-    const dispatch = useDispatch();
 
     return (
         <View>
             {loadingAuthorization ? (
-                <ActivityIndicator size="large" color="#FAB15F" />
+                <ActivityIndicator size="large" color="black" />
             ) : (
-                <View>
+                <View style={{ backgroundColor: 'white', height: '100%' }}>
                     <Image
-                        style={styles.orangeLine}
-                        source={require('../../../assets/images/OrangeLine.png')}
-                        resizeMethod="auto"
+                        style={styles.bg2}
+                        source={require('../../../assets/images/signup_bg.png')}
+                        resizeMethod="scale"
                     />
                     <TouchableOpacity
-                        style={styles.arrowBack}
-                        onPress={() => navigation.navigate('Login')}
+                        style={{ position: 'absolute', left: 40, top: 50 }}
+                        onPress={() => navigation.navigate('Main')}
+                        activeOpacity="0.8"
                     >
                         <ArrowBackIcon />
                     </TouchableOpacity>
-                    <Text style={styles.title}>First time? </Text>
-                    <View style={styles.inputsBox}>
-                        <View>
+                    <View style={{ alignSelf: 'center', width: '80%' }}>
+                        <Text style={styles.title}>Добро пожаловать...</Text>
+                        <View style={styles.inputsBox}>
                             <TextInput
-                                style={[styles.inputs, styles.emailInput]}
-                                placeholder="EMAIL"
+                                style={styles.inputs}
+                                placeholder="E-mail"
                                 placeholderTextColor="rgba(0, 0, 0, 0.5)"
                                 autoCorrect={false}
                                 autoComplete="email"
@@ -46,37 +44,44 @@ export const SignupPage = ({ navigation }) => {
                                 defaultValue={userEmail}
                                 onChangeText={(text) => setuserEmail(text)}
                             />
-                        </View>
-                        <View>
                             <TextInput
                                 style={styles.inputs}
-                                placeholder="PASSWORD"
+                                placeholder="Никнейм"
+                                placeholderTextColor="rgba(0, 0, 0, 0.5)"
+                                autoCorrect={false}
+                                autoCapitalize="none"
+                                defaultValue={userNickname}
+                                onChangeText={(text) => setUserNickname(text)}
+                            />
+                            <TextInput
+                                style={styles.inputs}
+                                placeholder="Номер телефона"
+                                placeholderTextColor="rgba(0, 0, 0, 0.5)"
+                                autoCorrect={false}
+                                autoComplete="phone"
+                                autoCapitalize="none"
+                                defaultValue={userPhone}
+                                onChangeText={(text) => setUserPhone(text)}
+                            />
+                            <TextInput
+                                style={styles.inputs}
+                                placeholder="Пароль"
                                 placeholderTextColor="rgba(0, 0, 0, 0.5)"
                                 autoCorrect={false}
                                 autoComplete="password"
                                 autoCapitalize="none"
                                 secureTextEntry={true}
                                 defaultValue={userPassword}
-                                onChangeText={(text) => setuserPassword(text)}
+                                onChangeText={(text) => setUserPassword(text)}
                             />
-                        </View>
-                        <TouchableOpacity
-                            style={{ position: 'absolute', right: -15, top: '28%' }}
-                            onPress={() => dispatch(signupStart({ userEmail, userPassword }))}
-                            activeOpacity="0.8"
-                        >
-                            <LinearGradient
-                                colors={['#FAAE5F', '#F86F5C']}
-                                style={styles.submitButtonGradient}
-                                start={{ x: 0.1, y: 0.2 }}
-                                locations={[0.1, 0.8]}
+                            <TouchableOpacity
+                                style={styles.submitButton}
+                                onPress={() => navigation.navigate('Login')}
+                                activeOpacity="0.8"
                             >
-                                <Image source={require('../../../assets/images/Arrow.png')} />
-                            </LinearGradient>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.boxTitleAuthorization}>
-                        <Text style={styles.titleAuthorization}>sing up</Text>
+                                <Text style={{ color: 'white', fontSize: 24 }}>Регистрация</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
             )}

@@ -6,22 +6,18 @@ import { AddPostIconActive } from '../../../assets/componentIcons/addPost/AddPos
 import { AddPostIconNotActive } from '../../../assets/componentIcons/addPost/AddPostIconNotActive';
 import { UsersIconActive } from '../../../assets/componentIcons/users/UsersIconActive';
 import { UsersIconNotActive } from '../../../assets/componentIcons/users/UsersIconNotActive';
-import { ProfileIconActive } from '../../../assets/componentIcons/profile/ProfileIconActive';
-import { ProfileIconNotActive } from '../../../assets/componentIcons/profile/ProfileIconNotActive';
 import { styles } from './navigationStyles';
 
 export const tabConfig = (route) => ({
     tabBarIcon: ({ focused }) => {
         let iconName;
 
-        if (route.name === 'Profile') {
-            iconName = focused ? <ProfileIconActive /> : <ProfileIconNotActive />;
-        } else if (route.name === 'Add post') {
-            iconName = focused ? <AddPostIconActive /> : <AddPostIconNotActive />;
-        } else if (route.name === 'All users') {
-            iconName = focused ? <UsersIconActive /> : <UsersIconNotActive />;
-        } else if (route.name === 'Posts') {
+        if (route.name === 'Prices') {
             iconName = focused ? <PostsIconActive /> : <PostsIconNotActive />;
+        } else if (route.name === 'Profile') {
+            iconName = focused ? <UsersIconActive /> : <UsersIconNotActive />;
+        } else if (route.name === 'Order') {
+            iconName = focused ? <AddPostIconActive /> : <AddPostIconNotActive />;
         }
 
         return iconName;

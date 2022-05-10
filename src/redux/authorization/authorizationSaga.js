@@ -28,25 +28,7 @@ export function* checkLoginSaga() {
 }
 
 export function* loginSaga(args) {
-    const { userEmail, userPassword } = args.payload;
-
-    try {
-        const response = yield call(apiCall, [
-            `post`,
-            `login`,
-            { email: userEmail, password: userPassword },
-        ]);
-
-        if (response.status === 200) {
-            yield put(loginSuccess(response.data));
-            localStore('save', USER__ID, response.data.userId);
-            localStore('save', USER__TOKEN, response.data.token);
-        }
-    } catch (error) {
-        yield put(loginFailure(error.message));
-        yield delay(3000);
-        yield put(removeError());
-    }
+    yield put(loginSuccess());
 }
 
 export function* signupSaga(args) {
