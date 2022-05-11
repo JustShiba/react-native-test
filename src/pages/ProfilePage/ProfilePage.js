@@ -1,9 +1,12 @@
 import React from 'react';
 import { View, StyleSheet, FlatList, TouchableOpacity, Text, Image } from 'react-native';
+import { useDispatch } from 'react-redux';
 import { orders } from './orders';
 import { Order } from '../../components/Order/Order';
+import { logout } from '../../redux/authorization/authorizationReducer';
 
 export const ProfilePage = () => {
+    const dispatch = useDispatch();
     return (
         <View style={{ width: '100%', height: '100%' }}>
             <Image
@@ -32,7 +35,9 @@ export const ProfilePage = () => {
                             Eng
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity activeOpacity="0.8" style={{ right: 0 }}>
+                    <TouchableOpacity activeOpacity="0.8" style={{ right: 0 }} onPress={() => {
+                        dispatch(logout());
+                    }}>
                         <Text
                             style={{
                                 color: 'white',
@@ -50,8 +55,6 @@ export const ProfilePage = () => {
                         color: 'white',
                         fontSize: 22,
                         fontFamily: 'RobotoSlab_Regular',
-                        marginBottom: 15,
-                        marginTop: 15,
                     }}
                 >
                     С возвращением, Виталий Ган

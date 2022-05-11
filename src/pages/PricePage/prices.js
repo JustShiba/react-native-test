@@ -11,8 +11,12 @@ export const allPrices = [
                 name: 'Сoals standart',
                 id: 1,
             },
+            {
+                name: 'One way delivery',
+                id: 3,
+            },
         ],
-        price: '20',
+        price: '25',
     },
     {
         id: 1,
@@ -35,7 +39,7 @@ export const allPrices = [
                 id: 3,
             },
         ],
-        price: '30',
+        price: '25',
     },
     {
         id: 2,
@@ -58,7 +62,7 @@ export const allPrices = [
                 id: 3,
             },
         ],
-        price: '30',
+        price: '25',
     },
     {
         id: 3,
@@ -81,6 +85,6 @@ export const allPrices = [
                 id: 3,
             },
         ],
-        price: '35',
+        price: '25',
     },
 ];

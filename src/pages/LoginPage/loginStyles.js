@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
     bg: {
         width: '100%',
-        height: '60%',
+        height: '50%',
     },
     bg2: {
         width: '100%',

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { FlatList, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { FlatList, RefreshControlBase, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
 import { Image, View } from 'react-native';
 
 import { ToOrder } from '../../components/ToOrder/ToOrder';
@@ -7,6 +7,19 @@ import { orders } from './orders';
 
 export const OrderPage = () => {
     const [address, setAddress] = useState('');
+    const [totalAmount, setTotalAmount] = useState(0);
+    const [refresh, setRefresh] = useState(false);
+
+    const universalSetTotalAmount = (amount, previosAmount, action) => {
+        if(action === 'clear'){
+            setTotalAmount(0);
+            setRefresh(!refresh);
+            return;
+        }
+        const newAmount = totalAmount - previosAmount + amount;
+        setTotalAmount(newAmount);
+    };
+
     return (
         <View style={{ width: '100%', height: '100%' }}>
             <Image
@@ -71,13 +84,17 @@ export const OrderPage = () => {
                 <FlatList
                     scrollEnabled={true}
                     data={orders}
-                    renderItem={(order) => <ToOrder orderInformation={order} />}
+                    renderItem={(order) => <ToOrder 
+                                            orderInformation={order} 
+                                            universalSetTotalAmount={universalSetTotalAmount} 
+                                            refresh={refresh}
+                                            />}
                     keyExtractor={(orders) => orders.id}
                 />
                 <View
                     style={{
                         width: '100%',
-                        marginBottom: 50,
+                        marginBottom: 10,
                         alignItems: 'flex-end',
                     }}
                 >
@@ -120,7 +137,7 @@ export const OrderPage = () => {
                             alignItems: 'center',
                         }}
                         onPress={() => {
-                            console.log('order');
+                            universalSetTotalAmount(null, null, 'clear');
                         }}
                         activeOpacity="0.5"
                     >
@@ -144,7 +161,7 @@ export const OrderPage = () => {
                                 height: '100%',
                             }}
                         >
-                            <Text style={{ fontSize: 17, fontWeight: '300' }}>115 Br</Text>
+                            <Text style={{ fontSize: 17, fontWeight: '300' }}>{`${totalAmount * 25} р`}</Text>
                         </View>
                     </TouchableOpacity>
                 </View>

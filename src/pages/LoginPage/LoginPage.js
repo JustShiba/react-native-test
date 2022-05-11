@@ -30,7 +30,7 @@ export const LoginPage = ({ navigation }) => {
                     >
                         <ArrowBackIcon />
                     </TouchableOpacity>
-                    <View style={{ alignSelf: 'center', width: '80%' }}>
+                    <View style={{ alignSelf: 'center', width: '80%', height: '50%' }}>
                         <Text style={styles.title}>С возвращением...</Text>
                         <View style={styles.inputsBox}>
                             <TextInput

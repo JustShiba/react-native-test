@@ -1,8 +1,14 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Text, View, FlatList, TouchableOpacity } from 'react-native';
 
-export const ToOrder = ({ orderInformation }) => {
+export const ToOrder = ({ orderInformation, universalSetTotalAmount, refresh }) => {
     const { name } = orderInformation.item;
+    const [amount, setAmount] = useState(0);
+
+    useEffect(() => {
+        setAmount(0)
+    }, [refresh])
+
     return (
         <View
             style={{
@@ -39,7 +45,10 @@ export const ToOrder = ({ orderInformation }) => {
                         marginRight: 15,
                     }}
                     onPress={() => {
-                        console.log('remove');
+                        const newNumber = amount - 1; 
+                        if(newNumber < 0) return
+                        universalSetTotalAmount(newNumber, amount);
+                        setAmount(newNumber);
                     }}
                     activeOpacity="0.5"
                 >
@@ -60,7 +69,7 @@ export const ToOrder = ({ orderInformation }) => {
                         color: 'black',
                     }}
                 >
-                    1
+                    {amount}
                 </Text>
                 <TouchableOpacity
                     style={{
@@ -71,8 +80,11 @@ export const ToOrder = ({ orderInformation }) => {
                         paddingRight: 10,
                         marginLeft: 15,
                     }}
-                    onPress={() => {
-                        console.log('add');
+                    onPress={() =>  {
+                        const newNumber = amount + 1 
+                        if(newNumber > 10) return
+                        universalSetTotalAmount(newNumber, amount);
+                        setAmount(newNumber);
                     }}
                     activeOpacity="0.5"
                 >
