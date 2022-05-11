@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { FlatList, RefreshControlBase, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { FlatList, Text, TextInput, TouchableOpacity } from 'react-native';
 import { Image, View } from 'react-native';
 
 import { ToOrder } from '../../components/ToOrder/ToOrder';
