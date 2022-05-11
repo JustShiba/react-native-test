@@ -10,6 +10,7 @@ export const LoginPage = ({ navigation }) => {
     const [userEmail, setuserEmail] = useState('');
     const [userPassword, setUserPassword] = useState('');
     const { loadingAuthorization } = useSelector((state) => state.authorization);
+    const { useEng } = useSelector((state) => state.users)
     const dispatch = useDispatch();
 
     return (
@@ -31,7 +32,7 @@ export const LoginPage = ({ navigation }) => {
                         <ArrowBackIcon />
                     </TouchableOpacity>
                     <View style={{ alignSelf: 'center', width: '80%', height: '50%' }}>
-                        <Text style={styles.title}>С возвращением...</Text>
+                        <Text style={styles.title}>{useEng ? `Welcom back...`: `С возвращением...`}</Text>
                         <View style={styles.inputsBox}>
                             <TextInput
                                 style={styles.inputs}
@@ -45,7 +46,7 @@ export const LoginPage = ({ navigation }) => {
                             />
                             <TextInput
                                 style={styles.inputs}
-                                placeholder="Пароль"
+                                placeholder={useEng ? `Password`: `Пароль`}
                                 placeholderTextColor="rgba(0, 0, 0, 0.5)"
                                 autoCorrect={false}
                                 autoComplete="password"
@@ -59,7 +60,7 @@ export const LoginPage = ({ navigation }) => {
                                 onPress={() => dispatch(loginStart())}
                                 activeOpacity="0.8"
                             >
-                                <Text style={{ color: 'white', fontSize: 24 }}>Войти</Text>
+                                <Text style={{ color: 'white', fontSize: 24 }}>{useEng ? `Log in`: `Войти`}</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

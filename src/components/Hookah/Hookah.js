@@ -1,10 +1,13 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, FlatList } from 'react-native';
+import { useSelector } from 'react-redux';
 
 import { styles } from './hookahStyles';
 
 export const Hookah = ({ hookahInformation }) => {
     const { name, desc, price } = hookahInformation.item;
+    const { useEng } = useSelector((state) => state.users)
+
     return (
         <View style={styles.postBox}>
             <View
@@ -55,7 +58,7 @@ export const Hookah = ({ hookahInformation }) => {
                         letterSpacing: 1,
                     }}
                 >
-                    Добавить
+                    {useEng ? `Add` : `Добавить`}
                 </Text>
             </TouchableOpacity>
         </View>

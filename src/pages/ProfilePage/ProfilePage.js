@@ -1,12 +1,16 @@
 import React from 'react';
 import { View, StyleSheet, FlatList, TouchableOpacity, Text, Image } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { orders } from './orders';
 import { Order } from '../../components/Order/Order';
 import { logout } from '../../redux/authorization/authorizationReducer';
+import { changeLanguage } from '../../redux/users/usersReducer';
 
 export const ProfilePage = () => {
+    const { useEng } = useSelector((state) => state.users);
     const dispatch = useDispatch();
+
+
     return (
         <View style={{ width: '100%', height: '100%' }}>
             <Image
@@ -24,7 +28,7 @@ export const ProfilePage = () => {
                         justifyContent: 'space-between',
                     }}
                 >
-                    <TouchableOpacity activeOpacity="0.8">
+                    <TouchableOpacity style={{ width: 50, height: 50 }} activeOpacity="0.8" onPress={() => dispatch(changeLanguage())}>
                         <Text
                             style={{
                                 color: 'white',
@@ -32,7 +36,7 @@ export const ProfilePage = () => {
                                 fontSize: 18,
                             }}
                         >
-                            Eng
+                            {useEng? `Rus`:`Eng`}
                         </Text>
                     </TouchableOpacity>
                     <TouchableOpacity activeOpacity="0.8" style={{ right: 0 }} onPress={() => {
@@ -57,7 +61,7 @@ export const ProfilePage = () => {
                         fontFamily: 'RobotoSlab_Regular',
                     }}
                 >
-                    С возвращением, Виталий Ган
+                    {useEng? `Welcome back, Виталий Ган`:`С возвращением, Виталий Ган`}
                 </Text>
                 <Text style={styles.info}>TowerDeLonghy</Text>
                 <Text style={styles.info}>Vitala_gan@icloud.com</Text>
@@ -77,7 +81,7 @@ export const ProfilePage = () => {
                 }}
             >
                 <Text style={{ fontWeight: '800', fontSize: 20, letterSpacing: 1 }}>
-                    Ваши заказы
+                {useEng? `Your orders`:`Ваши заказы`}
                 </Text>
                 <FlatList
                     scrollEnabled={true}

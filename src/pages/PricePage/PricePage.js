@@ -1,11 +1,12 @@
 import React from 'react';
 import { FlatList, Image, Text, View } from 'react-native';
+import { useSelector } from 'react-redux';
 
 import { Hookah } from '../../components/Hookah/Hookah';
 import { allPrices } from './prices';
 
-export const PricePage = ({ navigation }) => {
-
+export const PricePage = () => {
+    const { useEng } = useSelector((state) => state.users)
 
     return (
         <View>
@@ -35,7 +36,7 @@ export const PricePage = ({ navigation }) => {
                             fontWeight: '600',
                         }}
                     >
-                        Цены
+                        {useEng ? `PRICE LIST`: `Цены`}
                     </Text>
                     <FlatList
                         scrollEnabled={true}

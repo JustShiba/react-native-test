@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FlatList, Text, TextInput, TouchableOpacity } from 'react-native';
 import { Image, View } from 'react-native';
+import { useSelector } from 'react-redux';
 
 import { ToOrder } from '../../components/ToOrder/ToOrder';
 import { orders } from './orders';
@@ -9,9 +10,10 @@ export const OrderPage = () => {
     const [address, setAddress] = useState('');
     const [totalAmount, setTotalAmount] = useState(0);
     const [refresh, setRefresh] = useState(false);
+    const { useEng } = useSelector((state) => state.users)
 
     const universalSetTotalAmount = (amount, previosAmount, action) => {
-        if(action === 'clear'){
+        if (action === 'clear') {
             setTotalAmount(0);
             setRefresh(!refresh);
             return;
@@ -40,7 +42,7 @@ export const OrderPage = () => {
                     }}
                 >
                     <Text style={{ fontSize: 17, fontWeight: '800', letterSpacing: 0.2 }}>
-                        35-45 мин
+                        {useEng ? `35-45 min` : `35-45 мин`}
                     </Text>
                 </View>
                 <View
@@ -63,7 +65,7 @@ export const OrderPage = () => {
                             fontSize: 15,
                         }}
                     >
-                        Доставка
+                        {useEng ? `Delivery` : `Доставка`}
                     </Text>
                 </View>
             </View>
@@ -84,11 +86,11 @@ export const OrderPage = () => {
                 <FlatList
                     scrollEnabled={true}
                     data={orders}
-                    renderItem={(order) => <ToOrder 
-                                            orderInformation={order} 
-                                            universalSetTotalAmount={universalSetTotalAmount} 
-                                            refresh={refresh}
-                                            />}
+                    renderItem={(order) => <ToOrder
+                        orderInformation={order}
+                        universalSetTotalAmount={universalSetTotalAmount}
+                        refresh={refresh}
+                    />}
                     keyExtractor={(orders) => orders.id}
                 />
                 <View
@@ -112,7 +114,7 @@ export const OrderPage = () => {
                             letterSpacing: 1,
                             marginBottom: 20,
                         }}
-                        placeholder="Ваш адрес"
+                        placeholder={useEng ? `Your address` : `Ваш адрес`}
                         placeholderTextColor="#808080"
                         autoCorrect={true}
                         autoCapitalize="none"
@@ -151,7 +153,7 @@ export const OrderPage = () => {
                                 paddingLeft: 14,
                             }}
                         >
-                            <Text style={{ fontSize: 17, fontWeight: '300' }}>Заказать</Text>
+                            <Text style={{ fontSize: 17, fontWeight: '300' }}>{useEng ? `To order` : `Заказать`}</Text>
                         </View>
                         <View
                             style={{

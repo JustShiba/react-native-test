@@ -1,8 +1,11 @@
 import React from 'react';
 import { Text, View, FlatList } from 'react-native';
+import { useSelector } from 'react-redux';
 
 export const Order = ({ orderInformation }) => {
     const { name, date, amount } = orderInformation.item;
+    const { useEng } = useSelector((state) => state.users);
+
     return (
         <View
             style={{

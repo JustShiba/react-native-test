@@ -12,6 +12,7 @@ export const SignupPage = ({ navigation }) => {
     const [userPhone, setUserPhone] = useState('');
     const [userPassword, setUserPassword] = useState('');
     const { loadingAuthorization } = useSelector((state) => state.authorization);
+    const { useEng } = useSelector((state) => state.users)
 
     return (
         <View>
@@ -32,7 +33,7 @@ export const SignupPage = ({ navigation }) => {
                         <ArrowBackIcon />
                     </TouchableOpacity>
                     <View style={{ alignSelf: 'center', width: '80%' }}>
-                        <Text style={styles.title}>Добро пожаловать...</Text>
+                        <Text style={styles.title}>{useEng ? `Create Account`: `Добро пожаловать...`}</Text>
                         <View style={styles.inputsBox}>
                             <TextInput
                                 style={styles.inputs}
@@ -46,7 +47,7 @@ export const SignupPage = ({ navigation }) => {
                             />
                             <TextInput
                                 style={styles.inputs}
-                                placeholder="Никнейм"
+                                placeholder={useEng ? `Nickname`: `Никнейм`}
                                 placeholderTextColor="rgba(0, 0, 0, 0.5)"
                                 autoCorrect={false}
                                 autoCapitalize="none"
@@ -55,7 +56,7 @@ export const SignupPage = ({ navigation }) => {
                             />
                             <TextInput
                                 style={styles.inputs}
-                                placeholder="Номер телефона"
+                                placeholder={useEng ? `Telephone number`: `Номер телефона`}
                                 placeholderTextColor="rgba(0, 0, 0, 0.5)"
                                 autoCorrect={false}
                                 autoComplete="phone"
@@ -65,7 +66,7 @@ export const SignupPage = ({ navigation }) => {
                             />
                             <TextInput
                                 style={styles.inputs}
-                                placeholder="Пароль"
+                                placeholder={useEng ? `Password`: `Пароль`}
                                 placeholderTextColor="rgba(0, 0, 0, 0.5)"
                                 autoCorrect={false}
                                 autoComplete="password"
@@ -79,7 +80,7 @@ export const SignupPage = ({ navigation }) => {
                                 onPress={() => navigation.navigate('Login')}
                                 activeOpacity="0.8"
                             >
-                                <Text style={{ color: 'white', fontSize: 24 }}>Регистрация</Text>
+                                <Text style={{ color: 'white', fontSize: 24 }}>{useEng ? `Sign up`: `Регистрация`}</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
